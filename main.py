@@ -1,19 +1,15 @@
 import pygame
 import sys
-from PIL import Image
 
 
 class BasicWindow:
     def __init__(self):
         pygame.init()
-        self.fon = "snow.jpg"
+        self.fon = pygame.image.load("snow.jpg")
 
     def background_image(self):
-        im = Image.open(self.fon)
-        cropped_im = im.crop((250, 400, 1900, 1400))
-        cropped_im.save("cropped_snow.jpg")
-
-        self.im = pygame.image.load("cropped_snow.jpg")
+        self.fon = pygame.transform.scale(self.fon, (1600, 950))
+        self.im = self.fon
         self.w, self.h = self.im.get_width(), self.im.get_height()
         self.screen = pygame.display.set_mode((self.w, self.h))
 
