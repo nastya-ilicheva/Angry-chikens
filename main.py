@@ -1,14 +1,19 @@
 import pygame
 import sys
+from PIL import Image
 
 
 class BasicWindow:
     def __init__(self):
         pygame.init()
-        self.image_path = "snow.jpg"
+        self.fon = "snow.jpg"
 
     def background_image(self):
-        self.im = pygame.image.load(self.image_path)
+        im = Image.open(self.fon)
+        cropped_im = im.crop((250, 400, 1900, 1400))
+        cropped_im.save("cropped_snow.jpg")
+
+        self.im = pygame.image.load("cropped_snow.jpg")
         self.w, self.h = self.im.get_width(), self.im.get_height()
         self.screen = pygame.display.set_mode((self.w, self.h))
 
@@ -18,7 +23,7 @@ class BasicWindow:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.blit(self.im, (0, 0))  # Отображение фонового изображения в левом верхнем углу экрана
+            self.screen.blit(self.im, (0, 0))
 
             pygame.display.update()
 
