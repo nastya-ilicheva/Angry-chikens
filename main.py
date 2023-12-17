@@ -8,7 +8,7 @@ class BasicWindow:
         self.fon = pygame.image.load("snow.jpg")
 
     def background_image(self):
-        self.fon = pygame.transform.scale(self.fon, (1600, 950))
+        self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.im = self.fon
         self.w, self.h = self.im.get_width(), self.im.get_height()
         self.screen = pygame.display.set_mode((self.w, self.h))
