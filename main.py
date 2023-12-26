@@ -35,6 +35,7 @@ class StartWindow:
         new_window.run()
 
 
+
 if __name__ == "__main__":
     window = StartWindow()
     window.background_image()
