@@ -5,7 +5,11 @@ import sys
 class NewWindow:
     def __init__(self):
         pygame.init()
+<<<<<<< HEAD
         self.fon = pygame.image.load("data/snow.jpg")
+=======
+        self.fon = pygame.image.load("snow.jpg")
+>>>>>>> origin/main
 
 
     def run(self):
