@@ -6,7 +6,6 @@ class NewWindow:
     def __init__(self):
         pygame.init()
         self.fon = pygame.image.load("data/snow.jpg")
-        self.fon = pygame.image.load("snow.jpg")
 
 
     def run(self):
