@@ -7,7 +7,7 @@ from basicwindow import NewWindow
 class StartWindow:
     def __init__(self):
         pygame.init()
-        self.fon = pygame.image.load("data/lidhts.jpg")
+        self.fon = pygame.image.load("data/ligts.jpg")
 
     def background_image(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
