@@ -1,7 +1,7 @@
 import pygame
 import sys
 from button import Button
-from basicwindow import NewWindow
+from basic_window import NewWindow
 
 
 class StartWindow:
