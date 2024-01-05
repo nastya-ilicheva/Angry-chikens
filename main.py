@@ -1,7 +1,8 @@
 import pygame
 import sys
 from button import Button
-from basicwindow import NewWindow
+from basic_window import NewWindow
+from finish_window import FinalWindow
 
 
 class StartWindow:
@@ -19,21 +20,37 @@ class StartWindow:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    # continue
                     pygame.quit()
                     sys.exit()
 
             self.screen.blit(self.image, (0, 0))
 
             # создание кнопок
-            button = Button(20, 20, 50, 50, "dfjh", self.screen, self.open_new_window)
-            button.draw()
+            button_start = Button(600, 250, 120, 50, "старт", self.screen, self.open_new_window())
+            button_start.draw()
+            button_settings = Button(595, 330, 130, 50, "настройки", self.screen, self.open_new_window())
+            button_settings.draw()
+            button_quit = Button(600, 410, 120, 50, "выход", self.screen, self.open_new_window())
+            button_quit.draw()
 
             pygame.display.update()
+
+    # def open_new_window_basic(self):
+    #     new_window = NewWindow()
+    #     new_window.run()
+    #
+    # def open_new_window_settings(self):
+    #     new_window = FinalWindow()
+    #     new_window.run()
+    #
+    # def close_window(self):
+    #     pygame.quit()
+    #     sys.exit()
 
     def open_new_window(self):
         new_window = NewWindow()
         new_window.run()
-
 
 
 if __name__ == "__main__":
