@@ -22,3 +22,9 @@ class FinalWindow:
                     sys.exit()
             self.screen.blit(self.image, (0, 0))
             pygame.display.flip()
+
+
+if __name__ == "__main__":
+    window = FinalWindow()
+    window.run()
+
