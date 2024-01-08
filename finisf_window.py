@@ -2,7 +2,7 @@ import pygame
 import sys
 
 
-class NewWindow:
+class FinalWindow:
     def __init__(self):
         pygame.init()
         self.fon = pygame.image.load("data/fon_finish.jpg")

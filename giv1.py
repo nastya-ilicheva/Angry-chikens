@@ -3,7 +3,7 @@ import os
 import sys
 
 
-class AnimatedSprite(pygame.sprite.Sprite):
+class AnimatedSprite(pygame.sprite.Sprite): # тут гивки куриц
     def __init__(self, sheet, columns, rows, x, y, group):
         super().__init__(group)
         self.frames = []
@@ -36,13 +36,21 @@ def load_image(name):
 
 
 def main():
+    RedBird = 1 # флаги на выбор куриц
+    White_Parrot = 1
+    Vorona = 1
     pygame.init()
     running = True
     size = 1500, 1000
     screen = pygame.display.set_mode(size)
     screen.fill(('black'))
     all_sprites = pygame.sprite.Group()
-    dragon = AnimatedSprite(load_image("red_bird.png"), 4, 1, 25, 25, all_sprites)
+    if RedBird == True:
+        bird = AnimatedSprite(load_image("litle_red_bird.png"), 4, 1, 365, 25, all_sprites)
+    if Vorona == True:
+        bird = AnimatedSprite(load_image("vorona.png"), 8, 1, 205, 15, all_sprites)
+    if White_Parrot == True:
+        bird = AnimatedSprite(load_image("hen.png"), 4, 1, 15, 15, all_sprites)
 
     clock = pygame.time.Clock()
 
@@ -53,11 +61,11 @@ def main():
 
         all_sprites.update()
 
-        screen.fill(('black'))
+        screen.fill((50, 50, 150))
         all_sprites.draw(screen)
         pygame.display.flip()
 
-        clock.tick(80)
+        clock.tick(12) #будем менять\ться
 
     pygame.quit()
 
