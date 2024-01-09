@@ -41,14 +41,14 @@ def main():
     Vorona = 1
     pygame.init()
     running = True
-    size = 1500, 1000
+    size = 1500, 500
     screen = pygame.display.set_mode(size)
     screen.fill(('black'))
     all_sprites = pygame.sprite.Group()
     if RedBird == True:
         bird = AnimatedSprite(load_image("litle_red_bird.png"), 4, 1, 365, 25, all_sprites)
     if Vorona == True:
-        bird = AnimatedSprite(load_image("vorona.png"), 8, 1, 205, 15, all_sprites)
+        bird = AnimatedSprite(load_image("vorona2.png"), 8, 1, 205, 15, all_sprites)
     if White_Parrot == True:
         bird = AnimatedSprite(load_image("hen.png"), 4, 1, 15, 15, all_sprites)
 
