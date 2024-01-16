@@ -1,8 +1,10 @@
 import pygame
 
 
-class Rat:
-    def __init__(self, x, y, height, width, fon, screen):
+class Rat(pygame.sprite.Sprite):
+
+    def __init__(self, x, y, height, width, fon, screen, all_sprites):
+        super().__init__(all_sprites)
         pygame.init()
         self.x = x
         self.y = y
@@ -10,33 +12,12 @@ class Rat:
         self.width = width
         self.fon = fon
         self.screen = screen
-        self.maus_img = pygame.image.load("data/litle_mouse.png")
-        self.rect_maus = self.maus_img.get_rect()
-        self.mouse_die = 1  # флаг убийсва крысы, пока зеленый всегда
+        self.image = pygame.image.load("data/litle_mouse.png")
+        self.rect = self.image.get_rect()
+        # self.rect_maus.topleft = (1000, 300)
+        self.rat_die = 1  # флаг убийсва крысы, пока зеленый всегда
 
-    def fal(self):
-        clock = pygame.time.Clock()
-
-        fall_speed = 2
-        falling = True
-        running = True
-
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-
-            self.rect_maus.y += fall_speed
-
-            if self.rect_maus.y >= self.height - 60:
-                falling = False
-
-            self.screen.blit(self.fon, (0, 0))
-
-            if falling:
-                self.screen.blit(self.maus_img, self.rect_maus)
-
-            pygame.display.flip()
-            clock.tick(70)
-
-        pygame.quit()
+    def update(self):
+        # if not pygame.sprite.collide_mask(self, mountain):
+        print(self.rect.center)
+        self.rect = self.rect.move(0, 1)

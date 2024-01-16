@@ -24,6 +24,7 @@ class Button:
 
 
     def draw(self):
+        # mouse это мышка компьютера, а не наша крыса!!!
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
 
