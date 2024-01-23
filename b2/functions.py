@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from b2.settings import *
 
 
 def world_to_screen(point):

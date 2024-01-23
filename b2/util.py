@@ -1,6 +1,6 @@
-from settings import *
+from b2.settings import *
 import pygame
-from functions import *
+from b2.functions import *
 
 from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
 
