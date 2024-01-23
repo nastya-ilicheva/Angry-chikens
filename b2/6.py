@@ -20,22 +20,26 @@ circleShape.draw = util.my_draw_circle
 
 util.create_bound(world)
 
-bar_body = world.CreateStaticBody(position=(0, 0), shapes=polygonShape(box=(11, 1)))
-Brick(all_sprites, bar_body)
 
-brick_body = world.CreateDynamicBody(position=(3, 4))
-brick_body.CreatePolygonFixture(box=(1, 2), density=1, friction=0.3)
+bar_body = world.CreateStaticBody(position=(0, -8), shapes=polygonShape(box=(17, 1.2)))
+Brick(all_sprites, bar_body) #нужен brick_body но на все
+
+brick_body = world.CreateDynamicBody(position=(10, 4))
+brick_body.CreatePolygonFixture(box=(3, 10), density=1, friction=0.4)
 Ball(all_sprites, brick_body)
 
-brick_body = world.CreateDynamicBody(position=(3, 8))
-brick_body.CreatePolygonFixture(box=(1, 2), density=1, friction=0.3)
-Brick(all_sprites, bar_body)
+brick_body = world.CreateDynamicBody(position=(2, 15))
+brick_body.CreatePolygonFixture(box=(15, 2), density=1, friction=0.3)
+Brick(all_sprites, brick_body)
 
-brick_body = world.CreateDynamicBody(position=(3, 12))
-brick_body.CreatePolygonFixture(box=(1, 2), density=1, friction=0.3)
-Brick(all_sprites, bar_body)
+brick_body = world.CreateDynamicBody(position=(-7, 4))
+brick_body.CreatePolygonFixture(box=(3, 10), density=1, friction=0)
+Brick(all_sprites, brick_body)
 
 
+ball_body = world.CreateDynamicBody(position=(1, 7))
+ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
+Ball(all_sprites, ball_body, scale=True)
 
 
 def create_ball(position):
@@ -43,11 +47,7 @@ def create_ball(position):
     ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
     Ball(all_sprites, ball_body, scale=True)
 
-#
-# create_ball((-3, 7))
-#
 
-#
 
 
 running = True
@@ -60,7 +60,7 @@ while running:
 
     screen.fill((0, 0, 0, 0))
     world.Step(TIME_STEP, 10, 10)
-    util.draw_bodies(world)
+    #util.draw_bodies(world)
     all_sprites.update()
     all_sprites.draw(screen)
     pygame.display.flip()

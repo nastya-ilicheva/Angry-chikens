@@ -7,4 +7,4 @@ class Ball(ImageSpriteBody):
 
 
 class Brick(ImageSpriteBody):
-    image = pygame.image.load("../data/stone-wall-64x64.png")
+    image = pygame.image.load("../data/kamen.jpg")
