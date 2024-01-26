@@ -9,6 +9,7 @@ from b2.primitives import *
 
 pygame.init()
 
+
 class NewWindow:
     def __init__(self):
         self.fon = pygame.image.load("data/snow.jpg")
@@ -23,36 +24,27 @@ class NewWindow:
         pygame.time.set_timer(MYEVENTTYPE, 4)
 
         all_sprites = pygame.sprite.Group()
-        # Rat(100, 10, self.height, self.width, self.fon, screen, all_sprites)
 
         util.screen = screen
 
-
-        # bar_body = world.CreateStaticBody(position=(0, -8), shapes=polygonShape(box=(17, 1.2)))
-        # primitives.Brick(all_sprites, bar_body)
-        #
-        # ball_body = world.CreateDynamicBody(position=(1, 7))
-        # ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0.8)
-        # primitives.Ball(all_sprites, ball_body, scale=True)
-
         bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
-        Brick(all_sprites, bar_body)
+        Brick(all_sprites, bar_body)  # пол
 
         brick_body = world.CreateDynamicBody(position=(19, -20))
-        brick_body.CreatePolygonFixture(box=(3, 10), density=1, friction=0.4)
-        Brick(all_sprites, brick_body)
-        #
-        # brick_body = world.CreateDynamicBody(position=(22, -10))
-        # brick_body.CreatePolygonFixture(box=(15, 2), density=1, friction=0.3)
-        # Brick(all_sprites, brick_body)
+        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.4)
+        Brick(all_sprites, brick_body)  # правая стена
+
+        brick_body = world.CreateDynamicBody(position=(37, -20))
+        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.3)
+        Brick(all_sprites, brick_body)  # левая стена
 
         brick_body = world.CreateDynamicBody(position=(28, -15))
-        brick_body.CreatePolygonFixture(box=(3, 3), density=1, friction=0.4)
-        Brick(all_sprites, brick_body)
+        brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=0.4)
+        Brick(all_sprites, brick_body)  # крыша
         #
-        # ball_body = world.CreateDynamicBody(position=(26, -20))
-        # ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0.8)
-        # Ball(all_sprites, ball_body, scale=True)
+        ball_body = world.CreateDynamicBody(position=(29, -21))
+        ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0.8)
+        Ball(all_sprites, ball_body, scale=True)  # крысяндра в крепости
 
         running = True
 
