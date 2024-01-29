@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from primitives import Ball, Brick
+from primitives_v2 import Ball, Brick
 from functions import *
 import util
 from math import sin
@@ -19,25 +19,6 @@ util.screen = screen
 polygonShape.draw = util.my_draw_polygon
 circleShape.draw = util.my_draw_circle
 
-# util.create_bound(world)
-#
-#
-# bar_body = world.CreateStaticBody(position=(0, -8), shapes=polygonShape(box=(17, 1.2)))
-# Brick(all_sprites, bar_body) #нужен brick_body но на все
-#
-# brick_body = world.CreateDynamicBody(position=(10, 4))
-# brick_body.CreatePolygonFixture(box=(3, 10), density=1, friction=0.4)
-# Ball(all_sprites, brick_body)
-#
-# brick_body = world.CreateDynamicBody(position=(2, 15))
-# brick_body.CreatePolygonFixture(box=(15, 2), density=1, friction=0.3)
-# Brick(all_sprites, brick_body)
-#
-# brick_body = world.CreateDynamicBody(position=(-7, 4))
-# brick_body.CreatePolygonFixture(box=(3, 10), density=1, friction=0)
-# Brick(all_sprites, brick_body)
-
-
 ball_body = world.CreateDynamicBody(position=(-15, -15))
 ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0)
 
@@ -50,13 +31,12 @@ center_body = world.CreateStaticBody(
 center_body1 = world.CreateStaticBody(position=(0, 0))
 center_body1.CreateCircleFixture(radius=3, density=1, friction=0.3)
 
-joint = world.CreateMotorJoint(bodyA=ball_body, bodyB=center_body, maxForce=10000, maxTorque=1000)
+joint = world.CreateMotorJoint(bodyA=ball_body, bodyB=center_body, maxForce=100, maxTorque=1000)
 
-# mJoint = world.CreateMouseJoint(bodyA = center_body, bodyB = ball_body, target=(10,0))
 mJoint = world.CreateMouseJoint(bodyA=center_body,
                                 bodyB=ball_body,
                                 target=ball_body.position,
-                                maxForce=10000.0)
+                                maxForce=5000000.0)
 
 
 def create_ball(position):
@@ -66,14 +46,19 @@ def create_ball(position):
 
 
 running = True
+moving = False
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            world.DestroyBody(center_body1)
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            moving = True
         if event.type == pygame.MOUSEMOTION:
-            mJoint.target = screen_to_world(pygame.mouse.get_pos())
+            if moving:
+                mJoint.target = screen_to_world(pygame.mouse.get_pos())
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            moving = False
+            world.DestroyBody(center_body1)
 
     screen.fill((0, 0, 0, 0))
     world.Step(TIME_STEP, 10, 10)
