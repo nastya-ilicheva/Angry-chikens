@@ -30,9 +30,9 @@ class StartWindow:
 
             pygame.display.update()
 
-    def open_new_window(self):
-        new_window = NewWindow()
-        new_window.run()
+    # def open_new_window(self):
+    #     new_window = NewWindow()
+    #     new_window.run()
 
 
 
