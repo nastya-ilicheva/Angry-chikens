@@ -11,4 +11,4 @@ class Brick(ImageSpriteBody):
 
 
 class Bird(ImageSpriteBody):
-    image = pygame.image.load("data/one_bird.png")
+    image = pygame.image.load("data/litle_red_birdpng.png")

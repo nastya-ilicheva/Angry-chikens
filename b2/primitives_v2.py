@@ -2,11 +2,11 @@ import pygame
 from b2.classes import ImageSpriteBody
 
 
-class Ball(ImageSpriteBody):
+class Ball(ImageSpriteBody, pygame.sprite.Sprite):
     image = pygame.image.load("../data/mouse.png")
 
 
-class Brick(ImageSpriteBody):
+class Brick(ImageSpriteBody,):
     image = pygame.image.load("../data/kamen.jpg")
 
 
