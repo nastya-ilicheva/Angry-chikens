@@ -29,7 +29,7 @@ class FlyBird:
         self.ball_body = world.CreateDynamicBody(position=(-15, -15))
         self.ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0)
 
-        Bird(all_sprites, self.ball_body, scale=True)
+        # Bird(all_sprites, self.ball_body, scale=True)
 
         self.center_body = world.CreateStaticBody(
             position=(0, 0),
