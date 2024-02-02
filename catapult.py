@@ -2,7 +2,7 @@ import pygame
 
 # from b2.catapult import ball_body
 from b2.settings import *
-from b2.primitives import Ball, Brick, Bird
+from b2.primitives import Ball, Brick, Bird, Bird1
 # from b2.functions import *
 # import b2.util
 from math import sin
@@ -24,19 +24,22 @@ all_sprites = pygame.sprite.Group()
 
 class FlyBird:
 
-    def start(self, world):
+    def __init__(self, world, sprite_group, center_body):
 
         self.ball_body = world.CreateDynamicBody(position=(-15, -15))
-        self.ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0)
+        self.ball_body.CreateCircleFixture(radius=3, density=1, friction=0.3, restitution=0)
 
-        # Bird(all_sprites, self.ball_body, scale=True)
+        self.center_body = center_body
 
-        self.center_body = world.CreateStaticBody(
-            position=(0, 0),
-            shapes=polygonShape(box=(1, 1))
-        )
-        self.center_body1 = world.CreateStaticBody(position=(0, 0))
-        self.center_body1.CreateCircleFixture(radius=3, density=1, friction=0.3)
+        # self.sprite = Bird(sprite_group, self.ball_body, scale=True)
+        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/litle_red_bird.png"), columns=4, rows=1, scale=True)
+
+        # self.center_body = world.CreateStaticBody(
+        #     position=(-20, -20),
+        #     shapes=polygonShape(box=(1, 1))
+        # )
+        # self.center_body1 = world.CreateStaticBody(position=(-20, -20))
+        # self.center_body1.CreateCircleFixture(radius=3, density=1, friction=0.3)
 
         self.joint = world.CreateMotorJoint(bodyA=self.ball_body, bodyB=self.center_body, maxForce=10000, maxTorque=1000000)
 
@@ -59,38 +62,3 @@ class FlyBird:
         ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
         Ball(all_sprites, ball_body, scale=True)
 
-# flag = True
-#
-# running = True
-# moving = False
-# while running:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-#         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-#             moving = True
-#         if event.type == pygame.MOUSEMOTION:
-#             if moving:
-#                 mJoint.target = screen_to_world(pygame.mouse.get_pos())
-#         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-#             moving = False
-#             world.DestroyBody(center_body1)
-#             world.DestroyJoint(rope)
-#             world.DestroyJoint(mJoint)
-#
-#
-#     if flag:
-#         print(ball_body.position, center_body.position)
-#         if (ball_body.position.x - center_body.position.x) ** 2 + (ball_body.position.y - center_body.position.y) ** 2 < 4:
-#             print(1)
-#             world.DestroyJoint(joint)
-#             world.DestroyBody(center_body)
-#             flag = False
-#     # screen.fill((0, 0, 0, 0))
-#     # world.Step(TIME_STEP, 10, 10)
-#     # util.draw_bodies(world)
-#     # all_sprites.update()
-#     # all_sprites.draw(screen)
-#     # pygame.display.flip()
-#     # clock.tick(TARGET_FPS)
-# pygame.quit()

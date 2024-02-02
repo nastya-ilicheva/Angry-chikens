@@ -1,5 +1,5 @@
 import pygame
-from b2.classes import ImageSpriteBody
+from b2.classes import ImageSpriteBody, AnimatedImageSpriteBody
 
 
 class Ball(ImageSpriteBody):
@@ -12,3 +12,7 @@ class Brick(ImageSpriteBody):
 
 class Bird(ImageSpriteBody):
     image = pygame.image.load("data/litle_red_birdpng.png")
+
+
+class Bird1(AnimatedImageSpriteBody):
+    image = pygame.image.load("data/litle_red_bird.png")

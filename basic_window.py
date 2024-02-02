@@ -70,17 +70,22 @@ class NewWindow:
         running = True
         died = False
 
-        def create_ball(position):
-            ball_body = world.CreateDynamicBody(position=position)
-            ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
-            Ball(all_sprites, ball_body, scale=True)
+        # def create_ball(position):
+        #     ball_body = world.CreateDynamicBody(position=position)
+        #     ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
+        #     Ball(all_sprites, ball_body, scale=True)
 
-        bird = FlyBird()
-        bird.start(world)
-        Bird(all_sprites, bird.ball_body, scale=True)
+        center_body = world.CreateStaticBody(
+            position=(-20, -20),
+            shapes=polygonShape(box=(0.2, 0.2))
+        )
+
+        bird_sprites = pygame.sprite.Group()
+
+        bird = FlyBird(world, bird_sprites, center_body)
 
         flag = True
-        flag1 = True
+        flag1 = False
 
         running = True
         moving = False
@@ -93,6 +98,7 @@ class NewWindow:
                     sys.exit()
                 if event.type == MYEVENTTYPE:
                     all_sprites.update()
+                    bird_sprites.update(True)
 
                 # elif event.type == pygame.MOUSEBUTTONDOWN:
                 #     if event.button == 1:
@@ -103,35 +109,41 @@ class NewWindow:
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     moving = True
-                    print(1)
+                    # print(1)
                 if event.type == pygame.MOUSEMOTION:
                     if moving:
                         bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
-                        print(2)
+                        # print(2)
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     moving = False
-                    print(3)
-                    world.DestroyBody(bird.center_body1)
+                    # print(3)
+                    # world.DestroyBody(bird.center_body)
                     world.DestroyJoint(bird.rope)
                     world.DestroyJoint(bird.mJoint)
-                    print(4)
+                    # print(4)
+                    flag1 = True
 
 
             screen.blit(self.fon, (0, 0))
             world.Step(settings.TIME_STEP, 10, 10)
 
-            all_sprites.draw(screen)
-            pygame.display.flip()
+
 
             # catapult
             if flag1:
-                print(bird.ball_body.position, bird.center_body.position)
+                # print(bird.ball_body.position, bird.center_body.position)
                 if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
                         bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
                     print(5)
                     world.DestroyJoint(bird.joint)
-                    world.DestroyBody(bird.center_body)
+                    world.DestroyBody(center_body)
                     flag1 = False
+
+                    # bird.sprite.kill()
+                    # world.DestroyBody(bird.sprite.body)
+                    # bird = FlyBird(world, bird_sprites, center_body)
+
+                    # bird = FlyBird(world, bird_sprites, center_body)
 
                     # asyncio.run(self.create_bird())
 
@@ -141,8 +153,11 @@ class NewWindow:
 
             # screen.fill((0, 0, 0, 0))
             # world.Step(TIME_STEP, 10, 10)
-            util.draw_bodies(world)
-            # all_sprites.update()
+            # util.draw_bodies(world)
+            all_sprites.update()
+            all_sprites.draw(screen)
+            bird_sprites.draw(screen)
+            pygame.display.flip()
             # all_sprites.draw(screen)
             # pygame.display.flip()
             # clock.tick(TARGET_FPS)
