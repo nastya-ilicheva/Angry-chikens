@@ -64,8 +64,10 @@ class NewWindow:
         Brick(all_sprites, brick_body)  # крыша
         #
         ball_body = world.CreateDynamicBody(position=(29, -21))
-        ball_body.CreateCircleFixture(radius=5, density=1, friction=0.1, restitution=0.8)
+        ball_body.CreateCircleFixture(radius=6, density=0.3, friction=0.1, restitution=1)
         Ball(all_sprites, ball_body, scale=True)  # крысяндра в крепости
+
+        RAT = Ball(all_sprites, ball_body, scale=True)
 
         running = True
         died = False
@@ -85,12 +87,26 @@ class NewWindow:
         running = True
         moving = False
 
+        pygame.mixer.music.load('data/chiken_music.mp3')
+        pygame.mixer.music.play()
+
         while running:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                for contact in world.contacts:
+                    fixture_a = contact.fixtureA
+                    fixture_b = contact.fixtureB
+
+                    if (fixture_a.body == brick_body and fixture_b.body == RAT.body) or (
+                            fixture_a.body == RAT.body and fixture_b.body == brick_body):
+                        world.DestroyBody(RAT.body)
+                        died = True
+                        RAT.kill()
+
                 if event.type == MYEVENTTYPE:
                     all_sprites.update()
 
@@ -116,18 +132,20 @@ class NewWindow:
                     world.DestroyJoint(bird.mJoint)
                     print(4)
 
-
             screen.blit(self.fon, (0, 0))
             world.Step(settings.TIME_STEP, 10, 10)
 
             all_sprites.draw(screen)
+            if died:
+                RAT.kill()  # удаление спрайта brick_body из группы спрайтов
+                died = False  # сброс флага died обратно в False, чтобы установить возможность будущих проверок столкновений
+
             pygame.display.flip()
 
             # catapult
             if flag1:
                 print(bird.ball_body.position, bird.center_body.position)
-                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
-                        bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
+                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + ( bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
                     print(5)
                     world.DestroyJoint(bird.joint)
                     world.DestroyBody(bird.center_body)
