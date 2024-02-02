@@ -152,9 +152,6 @@ class NewWindow:
             # catapult
             if flag1:
                 # print(bird.ball_body.position, bird.center_body.position)
-                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
-                        bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
-                print(bird.ball_body.position, bird.center_body.position)
                 if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + ( bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
                     print(5)
                     world.DestroyJoint(bird.joint)
