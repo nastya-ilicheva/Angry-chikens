@@ -113,6 +113,7 @@ class NewWindow:
                         RAT.kill()
 
                 if event.type == MYEVENTTYPE:
+                    bird_sprites.update(True)
                     all_sprites.update()
 
                 # elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -138,15 +139,12 @@ class NewWindow:
                     # print(4)
                     flag1 = True
 
-            screen.blit(self.fon, (0, 0))
-            world.Step(settings.TIME_STEP, 10, 10)
 
-            all_sprites.draw(screen)
+
             if died:
                 RAT.kill()  # удаление спрайта brick_body из группы спрайтов
                 died = False  # сброс флага died обратно в False, чтобы установить возможность будущих проверок столкновений
 
-            pygame.display.flip()
 
 
             # catapult
@@ -173,6 +171,8 @@ class NewWindow:
             # screen.fill((0, 0, 0, 0))
             # world.Step(TIME_STEP, 10, 10)
             # util.draw_bodies(world)
+            screen.blit(self.fon, (0, 0))
+            world.Step(settings.TIME_STEP, 10, 10)
             all_sprites.update()
             all_sprites.draw(screen)
             bird_sprites.draw(screen)
