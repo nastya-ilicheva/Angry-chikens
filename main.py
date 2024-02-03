@@ -1,7 +1,7 @@
 import pygame
 import sys
 from button import Button
-from basic_window import NewWindow
+from basic_window import BasicWindow
 
 
 class StartWindow:
@@ -16,24 +16,28 @@ class StartWindow:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("angry chikens")
 
+        # создание кнопок
+        button_start = Button()
+        button_start.create_button(self.screen, "blue", 500, 200, 100, 50, 0, "start", "black")
+
+        button_exit = Button()
+        button_exit.create_button(self.screen, "blue", 500, 400, 100, 50, 0, "exit", "black")
+
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_start.pressed(pygame.mouse.get_pos()):
+                        new_window = BasicWindow()
+                        new_window.background_image()
+                    if button_exit.pressed(pygame.mouse.get_pos()):
+                        pygame.quit()
+                        sys.exit()
 
-            self.screen.blit(self.image, (0, 0))
-
-            # создание кнопок
-            button = Button(20, 20, 50, 50, "dfjh", self.screen, self.open_new_window)
-            button.draw()
-
+            # self.screen.blit(self.image, (0, 0))
             pygame.display.update()
-
-    # def open_new_window(self):
-    #     new_window = NewWindow()
-    #     new_window.run()
-
 
 
 if __name__ == "__main__":
