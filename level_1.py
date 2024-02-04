@@ -14,10 +14,12 @@ from b2.primitives import *
 from catapult import FlyBird
 
 pygame.init()
+world = world(gravity=(0, -0.5))
 
 
 class NewWindow:
     def __init__(self):
+
         self.fon = pygame.image.load("data/snow.jpg")
         self.all_sprites = pygame.sprite.Group()  # создаем группу спрайтов для всех спрайтов
 
@@ -139,18 +141,15 @@ class NewWindow:
                     # print(4)
                     flag1 = True
 
-
-
             if died:
                 RAT.kill()  # удаление спрайта brick_body из группы спрайтов
                 died = False  # сброс флага died обратно в False, чтобы установить возможность будущих проверок столкновений
 
-
-
             # catapult
             if flag1:
                 # print(bird.ball_body.position, bird.center_body.position)
-                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + ( bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
+                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
+                        bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
                     print(5)
                     world.DestroyJoint(bird.joint)
                     world.DestroyBody(center_body)
@@ -183,6 +182,5 @@ class NewWindow:
 
 
 if __name__ == "__main__":
-    world = world(gravity=(0, -0.5))
     window = NewWindow()
     window.run()
