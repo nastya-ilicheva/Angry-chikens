@@ -38,6 +38,9 @@ class NewWindow:
         MYEVENTTYPE = pygame.USEREVENT + 1
         pygame.time.set_timer(MYEVENTTYPE, 4)
 
+        create_bird_event = pygame.USEREVENT + 24
+        pygame.time.set_timer(create_bird_event, 4000)
+
         all_sprites = pygame.sprite.Group()
 
         util.screen = screen
@@ -68,7 +71,7 @@ class NewWindow:
         died = False
 
         center_body = world.CreateStaticBody(
-            position=(-20, -20),
+            position=(-40, -20),
             shapes=polygonShape(box=(0.2, 0.2))
         )
 
@@ -80,6 +83,7 @@ class NewWindow:
         start_flag = False
         running = True
         moving = False
+        kill_bird = False
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -103,6 +107,16 @@ class NewWindow:
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)
                     all_sprites.update()
+
+                if event.type == create_bird_event and kill_bird:
+                    bird.sprite.kill()
+                    world.DestroyBody(bird.sprite.body)
+                    center_body = world.CreateStaticBody(
+                        position=(-40, -20),
+                        shapes=polygonShape(box=(0.2, 0.2))
+                    )
+                    bird = FlyBird(world, bird_sprites, center_body)
+                    kill_bird = False
 
                 # реализация катапульты (удаление всех джоинтов для полета птицы)
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -129,6 +143,9 @@ class NewWindow:
                     world.DestroyJoint(bird.joint)
                     world.DestroyBody(center_body)
                     flag1 = False
+                    kill_bird = True
+
+
 
             # screen.fill((0, 0, 0, 0))
             # world.Step(TIME_STEP, 10, 10)
