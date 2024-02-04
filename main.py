@@ -16,6 +16,8 @@ class StartWindow:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("angry chikens")
 
+        self.screen.blit(self.image, (0, 0))
+
         # создание кнопок
         button_start = Button()
         button_start.create_button(self.screen, "blue", 500, 200, 100, 50, 0, "start", "black")
@@ -36,7 +38,6 @@ class StartWindow:
                         pygame.quit()
                         sys.exit()
 
-            # self.screen.blit(self.image, (0, 0))
             pygame.display.update()
 
 

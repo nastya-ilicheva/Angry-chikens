@@ -16,6 +16,8 @@ class BasicWindow:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("angry chikens")
 
+        self.screen.blit(self.image, (0, 0))
+
         # создание кнопок
         button_level_1 = Button()
         button_level_1.create_button(self.screen, "blue", 50, 50, 100, 50, 0, "level_1", "black")
@@ -42,7 +44,6 @@ class BasicWindow:
                         new_window = NewWindow()
                         new_window.run()
 
-            # self.screen.blit(self.image, (0, 0))
             pygame.display.update()
 
 
