@@ -29,12 +29,6 @@ class NewWindow:
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
 
-    # async def create_bird(self):
-    #     await asyncio.sleep(3)
-    #     bird = FlyBird()
-    #     bird.start(world)
-    #     Bird(self.all_sprites, bird.ball_body, scale=True)
-
     def run(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.width, self.height = self.fon.get_width(), self.fon.get_height()
@@ -71,13 +65,7 @@ class NewWindow:
 
         RAT = Ball(all_sprites, ball_body, scale=True)
 
-        running = True
         died = False
-
-        # def create_ball(position):
-        #     ball_body = world.CreateDynamicBody(position=position)
-        #     ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
-        #     Ball(all_sprites, ball_body, scale=True)
 
         center_body = world.CreateStaticBody(
             position=(-20, -20),
@@ -88,9 +76,8 @@ class NewWindow:
 
         bird = FlyBird(world, bird_sprites, center_body)
 
-        flag = True
         flag1 = False
-
+        start_flag = False
         running = True
         moving = False
 
@@ -98,7 +85,6 @@ class NewWindow:
         pygame.mixer.music.play()
 
         while running:
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -118,54 +104,31 @@ class NewWindow:
                     bird_sprites.update(True)
                     all_sprites.update()
 
-                # elif event.type == pygame.MOUSEBUTTONDOWN:
-                #     if event.button == 1:
-                #         click_pos = pygame.mouse.get_pos()
-                #         ball_body = world.CreateDynamicBody(position=(click_pos[0] // 5, click_pos[1] // 2))
-                #         ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=0.8)
-                #         Bird(all_sprites, ball_body, scale=True)
-
+                # реализация катапульты (удаление всех джоинтов для полета птицы)
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     moving = True
-                    # print(1)
                 if event.type == pygame.MOUSEMOTION:
                     if moving:
                         bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
-                        # print(2)
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-                    moving = False
-                    # print(3)
-                    # world.DestroyBody(bird.center_body)
-                    world.DestroyJoint(bird.rope)
-                    world.DestroyJoint(bird.mJoint)
-                    # print(4)
-                    flag1 = True
+                    if start_flag:
+                        moving = False
+                        world.DestroyJoint(bird.rope)
+                        world.DestroyJoint(bird.mJoint)
+                        flag1 = True
+                    start_flag = True
 
             if died:
                 RAT.kill()  # удаление спрайта brick_body из группы спрайтов
                 died = False  # сброс флага died обратно в False, чтобы установить возможность будущих проверок столкновений
 
-            # catapult
+            # разрыв последних джоинтов катапульты при пересечении птицей центра катапульты
             if flag1:
-                # print(bird.ball_body.position, bird.center_body.position)
                 if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
                         bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
-                    print(5)
                     world.DestroyJoint(bird.joint)
                     world.DestroyBody(center_body)
                     flag1 = False
-
-                    # bird.sprite.kill()
-                    # world.DestroyBody(bird.sprite.body)
-                    # bird = FlyBird(world, bird_sprites, center_body)
-
-                    # bird = FlyBird(world, bird_sprites, center_body)
-
-                    # asyncio.run(self.create_bird())
-
-                    # bird1 = FlyBird()
-                    # bird1.start(world)
-                    # Bird(all_sprites, bird1.ball_body, scale=True)
 
             # screen.fill((0, 0, 0, 0))
             # world.Step(TIME_STEP, 10, 10)
