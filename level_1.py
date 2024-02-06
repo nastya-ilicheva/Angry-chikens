@@ -64,7 +64,7 @@ class NewWindow:
         #
         ball_body = world.CreateDynamicBody(position=(29, -21))
         ball_body.CreateCircleFixture(radius=6, density=0.3, friction=0.1, restitution=1)
-        Ball(all_sprites, ball_body, scale=True)  # крысяндра в крепости
+        # RAT = Ball(all_sprites, ball_body, scale=True)  # крысяндра в крепости
 
         RAT = Ball(all_sprites, ball_body, scale=True)
 
@@ -80,7 +80,6 @@ class NewWindow:
         bird = FlyBird(world, bird_sprites, center_body)
 
         flag1 = False
-        start_flag = False
         running = True
         moving = 0
         kill_bird = False
@@ -94,15 +93,15 @@ class NewWindow:
                     pygame.quit()
                     sys.exit()
 
-                for contact in world.contacts:
-                    fixture_a = contact.fixtureA
-                    fixture_b = contact.fixtureB
-
-                    if (fixture_a.body == brick_body and fixture_b.body == RAT.body) or (
-                            fixture_a.body == RAT.body and fixture_b.body == brick_body):
-                        world.DestroyBody(RAT.body)
-                        died = True
-                        RAT.kill()
+                # for contact in world.contacts:
+                #     fixture_a = contact.fixtureA
+                #     fixture_b = contact.fixtureB
+                #
+                #     if (fixture_a.body == brick_body and fixture_b.body == RAT.body) or (
+                #             fixture_a.body == RAT.body and fixture_b.body == brick_body):
+                #         world.DestroyBody(RAT.body)
+                #         died = True
+                #         RAT.kill()
 
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)
@@ -126,12 +125,10 @@ class NewWindow:
                     if moving == 1:
                         bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and moving == 1:
-                    # if start_flag:
                     moving = 2
                     world.DestroyJoint(bird.rope)
                     world.DestroyJoint(bird.mJoint)
                     flag1 = True
-                    start_flag = True
 
             if died:
                 RAT.kill()  # удаление спрайта brick_body из группы спрайтов
@@ -148,9 +145,9 @@ class NewWindow:
 
 
 
-            # screen.fill((0, 0, 0, 0))
+            screen.fill((0, 0, 0, 0))
             # world.Step(TIME_STEP, 10, 10)
-            # util.draw_bodies(world)
+            util.draw_bodies(world)
             screen.blit(self.fon, (0, 0))
             world.Step(settings.TIME_STEP, 10, 10)
             all_sprites.update()
