@@ -53,3 +53,5 @@ class FlyBird:
         ball_body = world.CreateDynamicBody(position=position)
         ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
         Ball(all_sprites, ball_body, scale=True)
+
+

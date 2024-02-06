@@ -1,8 +1,8 @@
-import pygame
+import pygame as pg
 import sys
 import asyncio
 
-from b2.functions import screen_to_world
+from b2.functions import screen_to_world, world_to_screen
 from rat import Rat
 # from catapult import Catapult
 # from Box2D.b2 import world as box2d_world, polygonShape, circleShape, staticBody, dynamicBody
@@ -83,9 +83,17 @@ class NewWindow:
         running = True
         moving = 0
         kill_bird = False
+        line = True
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
+
+        catapult = pg.image.load('data/catapult.png')
+        scale = pygame.transform.scale(
+            catapult, (catapult.get_width() // 2,
+                       catapult.get_height() // 2))
+        scale_rect = scale.get_rect(center=(world_to_screen((-40, -26))))
+        screen.blit(scale, scale_rect)
 
         while running:
             for event in pygame.event.get():
@@ -116,6 +124,7 @@ class NewWindow:
                     )
                     bird = FlyBird(world, bird_sprites, center_body)
                     kill_bird = False
+                    line = True
                     moving = 0
 
                 # реализация катапульты (удаление всех джоинтов для полета птицы)
@@ -141,19 +150,32 @@ class NewWindow:
                     world.DestroyJoint(bird.joint)
                     world.DestroyBody(center_body)
                     flag1 = False
+                    line = False
                     kill_bird = True
 
-
-
             screen.fill((0, 0, 0, 0))
-            # world.Step(TIME_STEP, 10, 10)
             util.draw_bodies(world)
             screen.blit(self.fon, (0, 0))
+
+            catapult = pg.image.load('data/catapult.png')
+            scale = pygame.transform.scale(
+                catapult, (catapult.get_width() // 2,
+                           catapult.get_height() // 2))
+            scale_rect = scale.get_rect(center=(world_to_screen((-40, -26))))
+            screen.blit(scale, scale_rect)
+
+            if line:
+                pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-38, -18))), bird.sprite.rect.center, 8)
+                pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-42, -18))), bird.sprite.rect.center, 8)
+
+            # world.Step(TIME_STEP, 10, 10)
+
             world.Step(settings.TIME_STEP, 10, 10)
             all_sprites.update()
             all_sprites.draw(screen)
             bird_sprites.draw(screen)
             pygame.display.flip()
+
             # all_sprites.draw(screen)
             # pygame.display.flip()
             # clock.tick(TARGET_FPS)
