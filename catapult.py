@@ -27,20 +27,20 @@ class FlyBird:
 
     def __init__(self, world, sprite_group, center_body):
         self.ball_body = world.CreateDynamicBody(position=(-40, -20))
-        self.ball_body.CreateCircleFixture(radius=3, density=1, friction=0.3, restitution=0)
+        self.ball_body.CreateCircleFixture(radius=3, density=10, friction=0.5, restitution=0)
 
         self.center_body = center_body
 
         self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/litle_red_bird.png"), columns=4,
                             rows=1, scale=True)
 
-        self.joint = world.CreateMotorJoint(bodyA=self.ball_body, bodyB=self.center_body, maxForce=10000,
+        self.joint = world.CreateMotorJoint(bodyA=self.ball_body, bodyB=self.center_body, maxForce=1000,
                                             maxTorque=1000000)
 
         self.mJoint = world.CreateMouseJoint(bodyA=self.center_body,
                                              bodyB=self.ball_body,
                                              target=self.ball_body.position,
-                                             maxForce=5000000.0)
+                                             maxForce=50000.0)
 
         self.rope = world.CreateJoint(b2RopeJointDef(
             bodyA=self.ball_body,

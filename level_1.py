@@ -82,7 +82,7 @@ class NewWindow:
         flag1 = False
         start_flag = False
         running = True
-        moving = False
+        moving = 0
         kill_bird = False
 
         pygame.mixer.music.load('data/chiken_music.mp3')
@@ -117,19 +117,20 @@ class NewWindow:
                     )
                     bird = FlyBird(world, bird_sprites, center_body)
                     kill_bird = False
+                    moving = 0
 
                 # реализация катапульты (удаление всех джоинтов для полета птицы)
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    moving = True
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and moving == 0:
+                    moving = 1
                 if event.type == pygame.MOUSEMOTION:
-                    if moving:
+                    if moving == 1:
                         bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
-                if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-                    if start_flag:
-                        moving = False
-                        world.DestroyJoint(bird.rope)
-                        world.DestroyJoint(bird.mJoint)
-                        flag1 = True
+                if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and moving == 1:
+                    # if start_flag:
+                    moving = 2
+                    world.DestroyJoint(bird.rope)
+                    world.DestroyJoint(bird.mJoint)
+                    flag1 = True
                     start_flag = True
 
             if died:
