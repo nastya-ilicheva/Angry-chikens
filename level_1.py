@@ -10,7 +10,7 @@ from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
 from Box2D import b2RopeJointDef
 from b2 import util, primitives, settings, classes, functions
 from b2.primitives import *
-
+from level_2 import NewWindow2
 from catapult import FlyBird
 
 pygame.init()
@@ -24,7 +24,8 @@ class NewWindow:
         self.all_sprites = pygame.sprite.Group()  # создаем группу спрайтов для всех спрайтов
 
         self.bricks = []  # список для хранения ссылок на спрайты
-
+        self.level = 2
+        self.c = 0
         bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
@@ -96,6 +97,7 @@ class NewWindow:
             #     RAT.kill()
             #     world.DestroyBody(RAT.body)
             #     died = False
+            #     NewWindow2().run2()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -166,6 +168,11 @@ class NewWindow:
             all_sprites.draw(screen)
             bird_sprites.draw(screen)
             pygame.display.flip()
+            # if self.c == 3 and died:
+            #     NewWindow2().run2()
+            #     self.level = 2
+            # elif self.c == 3 and died == False:
+
 
             # clock.tick(TARGET_FPS)
 

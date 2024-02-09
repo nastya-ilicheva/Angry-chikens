@@ -12,7 +12,7 @@ class FinalWindow:
         self.image = self.fon
         self.width, self.height = self.image.get_width(), self.image.get_height()
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("game_is_over☺")
+        pygame.display.set_caption("☠️Game_is_over☠️")
 
         running = True
         while running:

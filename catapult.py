@@ -55,3 +55,16 @@ class FlyBird:
         Ball(all_sprites, ball_body, scale=True)
 
 
+
+class FlyBird2(FlyBird):
+    def __init__(self, world, sprite_group, center_body):
+        super().__init__(world, sprite_group, center_body)
+
+        self.ball_body.CreateCircleFixture(radius=30, density=10, friction=0.5, restitution=0)
+        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/hen.png"),
+                            columns=4,
+                            rows=1, scale=True)
+
+    def create_ball(self):
+        ball_body = world.CreateDynamicBody(position=(-40, -20))
+        ball_body.CreateCircleFixture(radius=50, density=10, friction=0.5, restitution=0)

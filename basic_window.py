@@ -14,25 +14,28 @@ class BasicWindow:
         self.image = self.fon
         self.width, self.height = self.image.get_width(), self.image.get_height()
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("angry chikens")
+        pygame.display.set_caption("Angry chikens")
 
         self.screen.blit(self.image, (0, 0))
-
+       # desired_font = pygame.font.Font("data/better-vcr-5.4.ttf", 22)
         # создание кнопок
         button_level_1 = Button()
-        button_level_1.create_button(self.screen, "blue", 50, 50, 100, 50, 0, "level_1", "black")
+        button_level_1.create_button(self.screen, '#FFFF66', 1100, 75, 100, 50, 0, "level_1", "#7D00DC")
 
         button_level_2 = Button()
-        button_level_2.create_button(self.screen, "blue", 200, 50, 100, 50, 0, "level_2", "black")
+        button_level_2.create_button(self.screen, '#FFFF66', 1100, 175, 100, 50, 0, "level_2", "#7D00DC")
 
         button_level_3 = Button()
-        button_level_3.create_button(self.screen, "blue", 350, 50, 100, 50, 0, "level_3", "black")
+        button_level_3.create_button(self.screen, 	'#FFFF66', 1100, 275, 100, 50, 0, "level_3", "#7D00DC")
 
         button_level_4 = Button()
-        button_level_4.create_button(self.screen, "blue", 500, 50, 100, 50, 0, "level_4", "black")
+        button_level_4.create_button(self.screen, '#FFFF66', 1100, 375, 100, 50, 0, "level_4", "#7D00DC")
 
         button_level_5 = Button()
-        button_level_5.create_button(self.screen, "blue", 650, 50, 100, 50, 0, "level_5", "black")
+        button_level_5.create_button(self.screen,  '#FFFF66', 1100, 475, 100, 50, 0, "level_5", "#7D00DC")
+
+       # self.screen.blit((pygame.font.Font("data/better-vcr-5.4.ttf", 22).render("Текст кнопки", True, "#7D00DC"), (1100, 375)))
+
 
         while True:
             for event in pygame.event.get():
