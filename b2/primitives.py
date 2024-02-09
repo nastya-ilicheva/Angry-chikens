@@ -16,3 +16,5 @@ class Bird(ImageSpriteBody):
 
 class Bird1(AnimatedImageSpriteBody):
     image = pygame.image.load("data/litle_red_bird.png")
+
+

@@ -52,19 +52,19 @@ class NewWindow:
         Brick(all_sprites, bar_body)  # пол
 
         brick_body = world.CreateDynamicBody(position=(19, -20))
-        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(4, 9), density=1, friction=0.6)
         Brick(all_sprites, brick_body)  # правая стена
 
         brick_body = world.CreateDynamicBody(position=(37, -20))
-        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(4, 9), density=1, friction=0.6)
         Brick(all_sprites, brick_body)  # левая стена
 
         brick_body = world.CreateDynamicBody(position=(28, -15))
-        brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=0.7)
         Brick(all_sprites, brick_body)  # крыша
         #
-        ball_body = world.CreateDynamicBody(position=(29, -21))
-        ball_body.CreateCircleFixture(radius=6, density=0.3, friction=0.1, restitution=1)
+        ball_body = world.CreateDynamicBody(position=(29, -8))
+        ball_body.CreateCircleFixture(radius=6, density=0.1, friction=1, restitution=0.8)
         RAT = Ball(all_sprites, ball_body, scale=True)
 
 
@@ -81,7 +81,7 @@ class NewWindow:
         kill_bird = False
         line = True
         died = False
-        pygame.mixer.music.load('data/chiken_music.mp3')
+        pygame.mixer.music.load('data/crazy-frog-axel-f-2005.mp3')
         pygame.mixer.music.play()
 
         catapult = pg.image.load('data/catapult.png')
@@ -99,10 +99,10 @@ class NewWindow:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()
+                    pg.quit()
                     sys.exit()
-            #
-            # if pygame.sprite.spritecollide(RAT, all_sprites, False):
+
+            # if pg.sprite.spritecollide(RAT, all_sprites, False):
             #     died = True
 
 
