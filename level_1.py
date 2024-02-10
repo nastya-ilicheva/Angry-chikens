@@ -103,48 +103,47 @@ class NewWindow:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            #
             # if pygame.sprite.spritecollide(RAT, all_sprites, False):
             #     died = True
 
 
-            if event.type == MYEVENTTYPE:
-                bird_sprites.update(True)
-                all_sprites.update()
+                if event.type == MYEVENTTYPE:
+                    bird_sprites.update(True)
+                    all_sprites.update()
 
-            if event.type == create_bird_event and kill_bird:
-                bird.sprite.kill()
-                world.DestroyBody(bird.sprite.body)
-                center_body = world.CreateStaticBody(
-                    position=(-40, -20),
-                    shapes=polygonShape(box=(0.2, 0.2)) )
+                if event.type == create_bird_event and kill_bird:
+                    bird.sprite.kill()
+                    world.DestroyBody(bird.sprite.body)
+                    center_body = world.CreateStaticBody(
+                        position=(-40, -20),
+                        shapes=polygonShape(box=(0.2, 0.2)) )
 
-                bird = FlyBird(world, bird_sprites, center_body)
-                kill_bird = False
-                line = True
-                moving = 0
+                    bird = FlyBird(world, bird_sprites, center_body)
+                    kill_bird = False
+                    line = True
+                    moving = 0
 
-            # реализация катапульты (удаление всех джоинтов для полета птицы)
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and moving == 0:
-                moving = 1
-            if event.type == pygame.MOUSEMOTION:
-                if moving == 1:
-                    bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
-            if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and moving == 1:
-                moving = 2
-                world.DestroyJoint(bird.rope)
-                world.DestroyJoint(bird.mJoint)
-                flag1 = True
+                # реализация катапульты (удаление всех джоинтов для полета птицы)
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and moving == 0:
+                    moving = 1
+                if event.type == pygame.MOUSEMOTION:
+                    if moving == 1:
+                        bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
+                if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and moving == 1:
+                    moving = 2
+                    world.DestroyJoint(bird.rope)
+                    world.DestroyJoint(bird.mJoint)
+                    flag1 = True
 
 
-            if flag1:
-                if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
-                        bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
-                    world.DestroyJoint(bird.joint)
-                    world.DestroyBody(center_body)
-                    flag1 = False
-                    line = False
-                    kill_bird = True
+                if flag1:
+                    if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
+                            bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
+                        world.DestroyJoint(bird.joint)
+                        world.DestroyBody(center_body)
+                        flag1 = False
+                        line = False
+                        kill_bird = True
 
             screen.fill((0, 0, 0, 0))
             util.draw_bodies(world)

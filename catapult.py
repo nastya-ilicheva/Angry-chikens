@@ -23,7 +23,7 @@ all_sprites = pygame.sprite.Group()
 # circleShape.draw = util.my_draw_circle
 
 
-class FlyBird:
+class FlyBird_Base:
 
     def __init__(self, world, sprite_group, center_body):
         self.ball_body = world.CreateDynamicBody(position=(-40, -20))
@@ -31,8 +31,7 @@ class FlyBird:
 
         self.center_body = center_body
 
-        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/litle_red_bird.png"), columns=4,
-                            rows=1, scale=True)
+        self.sprite = None
 
         self.joint = world.CreateMotorJoint(bodyA=self.ball_body, bodyB=self.center_body, maxForce=1000,
                                             maxTorque=1000000)
@@ -56,7 +55,15 @@ class FlyBird:
 
 
 
-class FlyBird2(FlyBird):
+class FlyBird(FlyBird_Base):
+    def __init__(self, world, sprite_group, center_body):
+        super().__init__(world, sprite_group, center_body)
+
+        self.ball_body.CreateCircleFixture(radius=30, density=10, friction=0.5, restitution=0)
+        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/litle_red_bird.png"), columns=4,
+                            rows=1, scale=True)
+
+class FlyBird2(FlyBird_Base):
     def __init__(self, world, sprite_group, center_body):
         super().__init__(world, sprite_group, center_body)
 
@@ -65,6 +72,6 @@ class FlyBird2(FlyBird):
                             columns=4,
                             rows=1, scale=True)
 
-    def create_ball(self):
-        ball_body = world.CreateDynamicBody(position=(-40, -20))
-        ball_body.CreateCircleFixture(radius=50, density=10, friction=0.5, restitution=0)
+    # def create_ball(self):
+    #     ball_body = world.CreateDynamicBody(position=(-40, -20))
+    #     ball_body.CreateCircleFixture(radius=50, density=10, friction=0.5, restitution=0)
