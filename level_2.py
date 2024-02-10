@@ -35,7 +35,7 @@ class NewWindow2:
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.width, self.height = self.fon.get_width(), self.fon.get_height()
         screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("New Window")
+        pygame.display.set_caption("level 2👀")
 
         MYEVENTTYPE = pygame.USEREVENT + 1
         pygame.time.set_timer(MYEVENTTYPE, 4)
