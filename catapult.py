@@ -23,9 +23,9 @@ all_sprites = pygame.sprite.Group()
 # circleShape.draw = util.my_draw_circle
 
 
-class FlyBird_Base:
+class FlyBird:
 
-    def __init__(self, world, sprite_group, center_body):
+    def __init__(self, world, sprite_group, center_body, image):
         self.ball_body = world.CreateDynamicBody(position=(-40, -20))
         self.ball_body.CreateCircleFixture(radius=3, density=10, friction=0.5, restitution=0)
 
@@ -48,30 +48,10 @@ class FlyBird_Base:
             localAnchorA=(0, 0),
             localAnchorB=(0, 0)))
 
+        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load(image), columns=4,
+                            rows=1, scale=True)
+
     def create_ball(position):
         ball_body = world.CreateDynamicBody(position=position)
         ball_body.CreateCircleFixture(radius=5, density=1, friction=0.3, restitution=1)
         Ball(all_sprites, ball_body, scale=True)
-
-
-
-class FlyBird(FlyBird_Base):
-    def __init__(self, world, sprite_group, center_body):
-        super().__init__(world, sprite_group, center_body)
-
-        self.ball_body.CreateCircleFixture(radius=30, density=10, friction=0.5, restitution=0)
-        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/litle_red_bird.png"), columns=4,
-                            rows=1, scale=True)
-
-class FlyBird2(FlyBird_Base):
-    def __init__(self, world, sprite_group, center_body):
-        super().__init__(world, sprite_group, center_body)
-
-        self.ball_body.CreateCircleFixture(radius=30, density=10, friction=0.5, restitution=0)
-        self.sprite = Bird1(sprite_group, self.ball_body, img=pygame.image.load("data/hen.png"),
-                            columns=4,
-                            rows=1, scale=True)
-
-    # def create_ball(self):
-    #     ball_body = world.CreateDynamicBody(position=(-40, -20))
-    #     ball_body.CreateCircleFixture(radius=50, density=10, friction=0.5, restitution=0)

@@ -24,8 +24,8 @@ class NewWindow:
         self.all_sprites = pygame.sprite.Group()  # создаем группу спрайтов для всех спрайтов
 
         self.bricks = []  # список для хранения ссылок на спрайты
-        self.level = 2
-        self.c = 0
+        # self.level = 2
+        # self.c = 0
         bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
@@ -41,7 +41,7 @@ class NewWindow:
         pygame.time.set_timer(MYEVENTTYPE, 4)
 
         create_bird_event = pygame.USEREVENT + 24
-        pygame.time.set_timer(create_bird_event, 4000)
+        pygame.time.set_timer(create_bird_event, 10000)
 
         all_sprites = pygame.sprite.Group()
 
@@ -74,14 +74,15 @@ class NewWindow:
             shapes=polygonShape(box=(0.2, 0.2)))
 
         bird_sprites = pygame.sprite.Group()
-        bird = FlyBird(world, bird_sprites, center_body)
+        bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
 
         flag1 = False
         running = True
         moving = 0
         kill_bird = False
         line = True
-        died = False
+        # died = False
+
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
 
@@ -116,9 +117,9 @@ class NewWindow:
                     world.DestroyBody(bird.sprite.body)
                     center_body = world.CreateStaticBody(
                         position=(-40, -20),
-                        shapes=polygonShape(box=(0.2, 0.2)) )
+                        shapes=polygonShape(box=(0.2, 0.2)))
 
-                    bird = FlyBird(world, bird_sprites, center_body)
+                    bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
                     kill_bird = False
                     line = True
                     moving = 0

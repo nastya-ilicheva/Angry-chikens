@@ -10,8 +10,8 @@ from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
 from Box2D import b2RopeJointDef
 from b2 import util, primitives, settings, classes, functions
 from b2.primitives import *
-#from level_1 import NewWindow
-from catapult import FlyBird2
+# from level_1 import NewWindow
+from catapult import FlyBird
 
 pygame.init()
 world = world(gravity=(0, -0.5))
@@ -29,7 +29,6 @@ class NewWindow2:
         bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
-
 
     def run2(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
@@ -68,13 +67,12 @@ class NewWindow2:
         ball_body.CreateCircleFixture(radius=6, density=1, friction=1, restitution=0.8)
         RAT = Ball(all_sprites, ball_body, scale=True)
 
-
         center_body = world.CreateStaticBody(
             position=(-40, -20),
             shapes=polygonShape(box=(0.5, 0.5)))
 
         bird_sprites = pygame.sprite.Group()
-        bird = FlyBird2(world, bird_sprites, center_body)
+        bird = FlyBird(world, bird_sprites, center_body, "data/hen.png")
 
         flag1 = False
         running = True
@@ -97,7 +95,7 @@ class NewWindow2:
             #     RAT.kill()
             #     world.DestroyBody(RAT.body)
             #     died = False
-            #NewWindow().run()
+            # NewWindow().run()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -106,7 +104,6 @@ class NewWindow2:
 
             # if pg.sprite.spritecollide(RAT, all_sprites, False):
             #     died = True
-
 
             if event.type == MYEVENTTYPE:
                 bird_sprites.update(True)
@@ -117,9 +114,9 @@ class NewWindow2:
                 world.DestroyBody(bird.sprite.body)
                 center_body = world.CreateStaticBody(
                     position=(-40, -20),
-                    shapes=polygonShape(box=(0.2, 0.2)) )
+                    shapes=polygonShape(box=(0.2, 0.2)))
 
-                bird = FlyBird2(world, bird_sprites, center_body)
+                bird = FlyBird(world, bird_sprites, center_body, "data/hen.png")
                 kill_bird = False
                 line = True
                 moving = 0
@@ -135,7 +132,6 @@ class NewWindow2:
                 world.DestroyJoint(bird.rope)
                 world.DestroyJoint(bird.mJoint)
                 flag1 = True
-
 
             if flag1:
                 if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
@@ -172,7 +168,7 @@ class NewWindow2:
             # if self.c == 3 and died:
             #     NewWindow().run()
             #     self.level = 2
-            #clock.tick(TARGET_FPS)
+            # clock.tick(TARGET_FPS)
 
 
 if __name__ == "__main__":
