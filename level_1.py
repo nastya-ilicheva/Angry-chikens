@@ -1,16 +1,13 @@
 import pygame as pg
 import sys
-import asyncio
 
 from b2.functions import screen_to_world, world_to_screen
-from rat import Rat
 # from catapult import Catapult
 # from Box2D.b2 import world as box2d_world, polygonShape, circleShape, staticBody, dynamicBody
-from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
-from Box2D import b2RopeJointDef
-from b2 import util, primitives, settings, classes, functions
+from Box2D.b2 import world, polygonShape, circleShape
+from b2 import settings
+from data import util
 from b2.primitives import *
-from level_2 import NewWindow2
 from catapult import FlyBird
 
 pygame.init()
@@ -53,21 +50,20 @@ class NewWindow:
         Brick(all_sprites, bar_body)  # пол
 
         brick_body = world.CreateDynamicBody(position=(19, -20))
-        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(5.5, 9), density=2, friction=1)
         Brick(all_sprites, brick_body)  # правая стена
 
         brick_body = world.CreateDynamicBody(position=(37, -20))
-        brick_body.CreatePolygonFixture(box=(4, 12), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(5.5, 9), density=1, friction=0.8)
         Brick(all_sprites, brick_body)  # левая стена
 
         brick_body = world.CreateDynamicBody(position=(28, -15))
-        brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=0.6)
+        brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=1)
         Brick(all_sprites, brick_body)  # крыша
         #
-        ball_body = world.CreateDynamicBody(position=(29, -21))
-        ball_body.CreateCircleFixture(radius=6, density=0.3, friction=0.1, restitution=1)
+        ball_body = world.CreateDynamicBody(position=(29, -8))
+        ball_body.CreateCircleFixture(radius=6, density=1, friction=1, restitution=0.8)
         RAT = Ball(all_sprites, ball_body, scale=True)
-
 
         center_body = world.CreateStaticBody(
             position=(-40, -20),

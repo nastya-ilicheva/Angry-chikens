@@ -1,12 +1,9 @@
-import pygame
-from settings import *
-from primitives_v2 import Ball, Brick
+from primitives_v2 import Ball
 from functions import *
-import util
-from math import sin
+from data import util
 
-from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
-from Box2D import b2Color, b2MouseJointDef, b2RopeJointDef
+from Box2D.b2 import world, polygonShape, circleShape
+from Box2D import b2RopeJointDef
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Catapult")

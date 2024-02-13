@@ -1,11 +1,8 @@
-import pygame
-from settings import *
 from primitives import Ball, Brick
 from functions import *
-import util
-import math
+from data import util
 
-from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
+from Box2D.b2 import world, polygonShape, circleShape
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Example_5")
