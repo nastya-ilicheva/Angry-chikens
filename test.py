@@ -9,29 +9,20 @@ class BasicWindow:
         pygame.init()
         self.fon = pygame.image.load("data/ligts.jpg")
 
-    # def text(self):
-    #     font = pygame.font.Font('data/better-vcr-5.4.ttf', 32)
-    #     with open("data/chicen - pyki.txt") as f:
-    #         for i, line in enumerate(f):
-    #             text_surface = font.render(line, True, '#FFFF66')
-    #             text_rect = text_surface.get_rect()
-    #             text_rect.center = (200, 200)
-    #             self.screen.blit(text_surface, text_rect)
-
+        self.font = pygame.font.Font('data/better-vcr-5.4.ttf', 32)
     def background_image(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.image = self.fon
         self.width, self.height = self.image.get_width(), self.image.get_height()
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Angry chikens")
-        font = pygame.font.Font('data/better-vcr-5.4.ttf', 32)
+
+
         with open("data/chicen - pyki.txt") as f:
             for i, line in enumerate(f):
-                text_surface = font.render(line, True, '#FFFF66')
+                text_surface = self.font.render(line, True, '#FFFF66')
                 text_rect = text_surface.get_rect()
-                text_rect.center = (200, 200)
-                #self.screen.blit(text_surface, text_rect)
-
+                text_rect.center = (800, 800)
         while True:
 
             for event in pygame.event.get():
@@ -39,8 +30,7 @@ class BasicWindow:
                     pygame.quit()
                     sys.exit()
 
-            self.screen = self.image, (0, 0)
-            #self.screen.blit(text_surface, text_rect)
+            self.screen.blit(self.image, (0, 0))
 
             button_level_1 = Button()
             button_level_1.create_button(self.screen, '#FFFF66', 1100, 75, 100, 50, 0, "level_1", "#7D00DC")
