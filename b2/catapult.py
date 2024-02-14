@@ -1,6 +1,6 @@
 from primitives_v2 import Ball
 from functions import *
-from data import util
+import util
 
 from Box2D.b2 import world, polygonShape, circleShape
 from Box2D import b2RopeJointDef

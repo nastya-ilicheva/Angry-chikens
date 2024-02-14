@@ -6,7 +6,7 @@ from b2.functions import screen_to_world, world_to_screen
 # from Box2D.b2 import world as box2d_world, polygonShape, circleShape, staticBody, dynamicBody
 from Box2D.b2 import world, polygonShape, circleShape
 from b2 import settings
-from data import util
+import util
 from b2.primitives import *
 # from level_1 import NewWindow
 from catapult import FlyBird

@@ -1,6 +1,6 @@
 from primitives import Ball, Brick
 from functions import *
-from data import util
+import util
 
 from Box2D.b2 import world, polygonShape, circleShape
 
