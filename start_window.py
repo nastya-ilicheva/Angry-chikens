@@ -19,17 +19,15 @@ class BasicWindow:
         pygame.display.set_caption("Angry chikens")
 
         self.screen.blit(self.image, (0, 0))
+        y = 80
         with open("data/chicen - pyki.txt") as f:
             for i in f:
-                # myFont = pygame.font.SysFont('jokerman', 30)
-                # myFont = pygame.font.SysFont('meiryo', 20)
-                myFont = pygame.font.SysFont('pmingliuextb', 24)
-                # myFont = pygame.font.SysFont('maiandragd', 30)
-                # myFont = pygame.font.SysFont('poorrichard', 30)
-                # myFont = pygame.font.SysFont('harrington', 22)
+                i = i.strip()
+                myFont = pygame.font.SysFont('maiandragd', 27)
                 # myText = myFont.render(i, 1, '#FFFF66')
-                myText = myFont.render(i, 1, '#FFFF60')
-                self.screen.blit(myText, (50, 70))
+                myText = myFont.render(i, 1, '#FFF9BA')
+                self.screen.blit(myText, (50, y))
+                y += 30
 
         while True:
             for event in pygame.event.get():
