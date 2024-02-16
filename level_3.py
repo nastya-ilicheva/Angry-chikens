@@ -14,7 +14,7 @@ pygame.init()
 world = world(gravity=(0, -0.5))
 
 
-class NewWindow:
+class NewWindow3:
     def __init__(self):
 
         self.fon = pygame.image.load("data/snow.jpg")
@@ -174,5 +174,5 @@ class NewWindow:
 
 
 if __name__ == "__main__":
-    window = NewWindow()
+    window = NewWindow3()
     window.run()

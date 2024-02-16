@@ -29,6 +29,22 @@ class BasicWindow:
                 self.screen.blit(myText, (50, y))
                 y += 30
 
+        pygame.display.update()
+        button_level_1 = Button()
+        button_level_1.create_button(self.screen, '#F5F5DC', 1133, 80, 100, 50, 0, "level 1", "#1E90FF")
+
+        button_level_2 = Button()
+        button_level_2.create_button(self.screen, '#FFF9BA', 1133, 160, 100, 50, 0, "level_2", "#1E90FF")
+
+        button_level_3 = Button()
+        button_level_3.create_button(self.screen, '#FFF590', 1133, 240, 100, 50, 0, "level_3", "#1E90FF")
+
+        button_level_4 = Button()
+        button_level_4.create_button(self.screen, '#FFEE4E', 1133, 320, 100, 50, 0, "level_4", "#1E90FF")
+
+        button_level_5 = Button()
+        button_level_5.create_button(self.screen, '#FFEA28', 1133, 400, 100, 50, 0, "level_5", "#1E90FF")
+
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -39,21 +55,6 @@ class BasicWindow:
                         new_window = NewWindow()
                         new_window.run()
 
-            pygame.display.update()
-            button_level_1 = Button()
-            button_level_1.create_button(self.screen, '#F5F5DC', 1133, 80, 100, 50, 0, "level 1", "#1E90FF")
-
-            button_level_2 = Button()
-            button_level_2.create_button(self.screen, '#FFF9BA', 1133, 160, 100, 50, 0, "level_2", "#1E90FF")
-
-            button_level_3 = Button()
-            button_level_3.create_button(self.screen, '#FFF590', 1133, 240, 100, 50, 0, "level_3", "#1E90FF")
-
-            button_level_4 = Button()
-            button_level_4.create_button(self.screen, '#FFEE4E', 1133, 320, 100, 50, 0, "level_4", "#1E90FF")
-
-            button_level_5 = Button()
-            button_level_5.create_button(self.screen, '#FFEA28', 1133, 400, 100, 50, 0, "level_5", "#1E90FF")
 
             pygame.display.update()
 

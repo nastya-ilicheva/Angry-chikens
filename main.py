@@ -1,3 +1,5 @@
+# мэйн больше не мэйн, запускаем старт виндов
+
 import pygame
 import sys
 from button import Button
