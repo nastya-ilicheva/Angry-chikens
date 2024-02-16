@@ -77,7 +77,7 @@ class NewWindow:
         moving = 0
         kill_bird = False
         line = True
-        # died = False
+        died = False
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -94,15 +94,15 @@ class NewWindow:
             #     RAT.kill()
             #     world.DestroyBody(RAT.body)
             #     died = False
-            #     NewWindow2().run2()
+                # NewWindow2().run2()
+            if RAT.rect.center[1] <= -28:
+                # died = True
+                print('died')# почему не выводится?
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            # if pygame.sprite.spritecollide(RAT, all_sprites, False):
-            #     died = True
-
 
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)

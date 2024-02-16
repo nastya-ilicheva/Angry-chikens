@@ -12,7 +12,7 @@ class BasicWindow:
 
     def background_image(self):
 
-        self.fon = pygame.transform.scale(self.fon, (1300, 820))
+        self.fon = pygame.transform.scale(self.fon, (1300, 720))
         self.image = self.fon
         self.width, self.height = self.image.get_width(), self.image.get_height()
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -25,7 +25,7 @@ class BasicWindow:
                 i = i.strip()
                 myFont = pygame.font.SysFont('maiandragd', 27)
                 # myText = myFont.render(i, 1, '#FFFF66')
-                myText = myFont.render(i, 1, '#FFF9BA')
+                myText = myFont.render(i, 1, '#FFEA28')
                 self.screen.blit(myText, (50, y))
                 y += 30
 
