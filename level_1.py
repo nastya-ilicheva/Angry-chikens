@@ -90,12 +90,13 @@ class NewWindow:
         screen.blit(scale, scale_rect)
 
         while running:
+            print(RAT.rect.center)
             # if died:
             #     RAT.kill()
             #     world.DestroyBody(RAT.body)
             #     died = False
                 # NewWindow2().run2()
-            if RAT.rect.center[1] <= -28:
+            if RAT.rect.center[1] > settings.SCREEN_HEIGHT:
                 # died = True
                 print('died')# почему не выводится?
 
