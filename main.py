@@ -2,6 +2,8 @@ import pygame
 import sys
 from button import Button
 from level_1 import NewWindow1
+from level_2 import NewWindow2
+from level_3 import NewWindow3
 
 
 class StartWindow:
@@ -53,6 +55,12 @@ class StartWindow:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if button_level_1.pressed(pygame.mouse.get_pos()):
                         new_window = NewWindow1()
+                        new_window.run()
+                    elif button_level_2.pressed(pygame.mouse.get_pos()):
+                        new_window = NewWindow2()
+                        new_window.run()
+                    elif button_level_3.pressed(pygame.mouse.get_pos()):
+                        new_window = NewWindow3()
                         new_window.run()
 
 

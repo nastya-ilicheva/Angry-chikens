@@ -28,7 +28,7 @@ class NewWindow2:
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
 
-    def run2(self):
+    def run(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.width, self.height = self.fon.get_width(), self.fon.get_height()
         screen = pygame.display.set_mode((self.width, self.height))
