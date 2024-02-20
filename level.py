@@ -87,6 +87,8 @@ class NewWindow:
             #print(RAT.rect.center)
             if died:
                 print('died')
+                return True
+                # sys.exit()
                 # RAT.kill()
                 # world.DestroyBody(RAT.body)
                 died = False
@@ -105,7 +107,8 @@ class NewWindow:
                     if button_back.pressed(pygame.mouse.get_pos()):
                         # pygame.quit()
                         # sys.exit()
-                        running = False
+                        # running = False
+                        return False
 
 
                 if event.type == MYEVENTTYPE:
@@ -180,5 +183,5 @@ class NewWindow:
 
 
 if __name__ == "__main__":
-    window = NewWindow(3, "level 1")
+    window = NewWindow(1, "hgfcjgfcg")
     window.run()
