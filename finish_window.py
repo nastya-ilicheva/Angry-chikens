@@ -5,7 +5,7 @@ import sys
 class FinalWindow:
     def __init__(self):
         pygame.init()
-        self.fon = pygame.image.load("data/fon_finish.jpg")
+        self.fon = pygame.image.load("data/finish_wind_picture.png")
 
     def run(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))

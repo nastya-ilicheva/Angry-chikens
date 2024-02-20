@@ -78,6 +78,7 @@ class NewWindow1:
         kill_bird = False
         line = True
         died = False
+        life = True
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -90,16 +91,17 @@ class NewWindow1:
         screen.blit(scale, scale_rect)
 
         while running:
-            print(RAT.rect.center)
-            # if died:
-            #     RAT.kill()
-            #     world.DestroyBody(RAT.body)
-            #     died = False
+            #print(RAT.rect.center)
+            if died:
+                print('died')
+                # RAT.kill()
+                # world.DestroyBody(RAT.body)
+                died = False
                 # NewWindow2().run2()
-            if RAT.rect.center[1] > settings.SCREEN_HEIGHT:
-                # died = True
-                print('died')# почему не выводится?
-
+            if RAT.rect.center[1] > settings.SCREEN_HEIGHT and life:
+                died = True
+                life = False
+            life = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
