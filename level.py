@@ -87,6 +87,7 @@ class NewWindow:
             #print(RAT.rect.center)
             if died:
                 print('died')
+                settings.COUNT += 1
                 return True
                 # sys.exit()
                 # RAT.kill()
