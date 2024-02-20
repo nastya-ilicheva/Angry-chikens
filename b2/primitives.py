@@ -2,8 +2,8 @@ import pygame
 from b2.classes import ImageSpriteBody, AnimatedImageSpriteBody
 
 
-class Ball(ImageSpriteBody):
-    image = pygame.image.load("data/mouse.png")
+# class Ball(ImageSpriteBody):
+#     image = pygame.image.load("data/mouse.png")
 
 
 import pygame
@@ -11,7 +11,7 @@ from b2.classes import ImageSpriteBody, AnimatedImageSpriteBody
 
 
 class Ball(ImageSpriteBody):
-    image = pygame.image.load("data/mouse.png")
+    image = pygame.image.load("data/main_rat.png")
 
 
 class Brick(ImageSpriteBody):

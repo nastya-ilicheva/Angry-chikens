@@ -91,6 +91,8 @@ class NewWindow1:
         screen.blit(scale, scale_rect)
 
         while running:
+            print(f"life: {life}")
+            print(f"died {died}")
             #print(RAT.rect.center)
             if died:
                 print('died')
@@ -98,10 +100,12 @@ class NewWindow1:
                 # world.DestroyBody(RAT.body)
                 died = False
                 # NewWindow2().run2()
-            if RAT.rect.center[1] > settings.SCREEN_HEIGHT and life:
+            if RAT.rect.center[1] >= settings.SCREEN_HEIGHT and life:
                 died = True
                 life = False
-            life = False
+                print(f"life1: {life}")
+                print(f"died1 {died}")
+            #life = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
