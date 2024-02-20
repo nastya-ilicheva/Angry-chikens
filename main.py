@@ -1,7 +1,7 @@
 import pygame
 import sys
 from button import Button
-from level_1 import NewWindow1
+from level import NewWindow1
 from level_2 import NewWindow2
 from level_3 import NewWindow3
 

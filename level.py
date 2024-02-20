@@ -9,12 +9,13 @@ from b2 import settings
 import util
 from b2.primitives import *
 from catapult import FlyBird
+from levels import *
 
 pygame.init()
 world = world(gravity=(0, -0.5))
 
 
-class NewWindow3:
+class NewWindow1:
     def __init__(self):
 
         self.fon = pygame.image.load("data/snow.jpg")
@@ -41,43 +42,23 @@ class NewWindow3:
         pygame.time.set_timer(create_bird_event, 10000)
 
         all_sprites = pygame.sprite.Group()
+        bird_sprites = pygame.sprite.Group()
 
         util.screen = screen
         polygonShape.draw = util.my_draw_polygon
         circleShape.draw = util.my_draw_circle
 
-        bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(30, 1)))
-        Brick(all_sprites, bar_body)  # пол
+        center_body, bird, RAT = level_1(world, all_sprites, bird_sprites)
 
-        brick_body = world.CreateDynamicBody(position=(21, -20))
-        brick_body.CreatePolygonFixture(box=(5.5, 9), density=9, friction=1)
-        Brick(all_sprites, brick_body)  # правая стена
-
-        brick_body = world.CreateDynamicBody(position=(30, -20))
-        brick_body.CreatePolygonFixture(box=(10, 9), density=5, friction=0.8)
-        Brick(all_sprites, brick_body)  # левая стена
-
-        brick_body = world.CreateDynamicBody(position=(28, -15))
-        brick_body.CreatePolygonFixture(box=(2,21 ), density=10, friction=1)
-        Brick(all_sprites, brick_body)  # крыша
-        #
-        ball_body = world.CreateDynamicBody(position=(29, -8))
-        ball_body.CreateCircleFixture(radius=6, density=15, friction=1, restitution=0.8)
-        RAT = Ball(all_sprites, ball_body, scale=True)
-
-        center_body = world.CreateStaticBody(
-            position=(-40, -20),
-            shapes=polygonShape(box=(0.2, 0.2)))
-
-        bird_sprites = pygame.sprite.Group()
-        bird = FlyBird(world, bird_sprites, center_body, "data/red_circle.png")
 
         flag1 = False
         running = True
         moving = 0
         kill_bird = False
         line = True
-        # died = False
+        died = False
+        life = True
+        bird_count = 0
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -90,19 +71,25 @@ class NewWindow3:
         screen.blit(scale, scale_rect)
 
         while running:
-            # if died:
-            #     RAT.kill()
-            #     world.DestroyBody(RAT.body)
-            #     died = False
-            #     NewWindow2().run2()
-
+            print(f"life: {life}")
+            print(f"died {died}")
+            #print(RAT.rect.center)
+            if died:
+                print('died')
+                # RAT.kill()
+                # world.DestroyBody(RAT.body)
+                died = False
+                # NewWindow2().run2()
+            if RAT.rect.center[1] >= settings.SCREEN_HEIGHT and life:
+                died = True
+                life = False
+                print(f"life1: {life}")
+                print(f"died1 {died}")
+            #life = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            # if pygame.sprite.spritecollide(RAT, all_sprites, False):
-            #     died = True
-
 
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)
@@ -115,7 +102,9 @@ class NewWindow3:
                         position=(-40, -20),
                         shapes=polygonShape(box=(0.2, 0.2)))
 
-                    bird = FlyBird(world, bird_sprites, center_body, "data/red_circle.png")
+                    if bird_count < 2:
+                        bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
+                        bird_count += 1
                     kill_bird = False
                     line = True
                     moving = 0
@@ -174,5 +163,5 @@ class NewWindow3:
 
 
 if __name__ == "__main__":
-    window = NewWindow3()
+    window = NewWindow1()
     window.run()
