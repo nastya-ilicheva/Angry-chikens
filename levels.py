@@ -21,14 +21,14 @@ def level_1(world, all_sprites, bird_sprites):
     #
     ball_body = world.CreateDynamicBody(position=(29, -8))
     ball_body.CreateCircleFixture(radius=6, density=1, friction=1, restitution=0.8)
-    RAT = Ball(all_sprites, ball_body, scale=True)
+    rat = Ball(all_sprites, ball_body, scale=True)
 
     center_body = world.CreateStaticBody(
         position=(-40, -20),
         shapes=polygonShape(box=(0.2, 0.2)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
-    return center_body, bird, RAT
+    return center_body, bird, rat, 2
 
 
 def level_2(world, all_sprites, bird_sprites):
@@ -49,14 +49,14 @@ def level_2(world, all_sprites, bird_sprites):
     #
     ball_body = world.CreateDynamicBody(position=(29, -8))
     ball_body.CreateCircleFixture(radius=6, density=1, friction=1, restitution=0.8)
-    RAT = Ball(all_sprites, ball_body, scale=True)
+    rat = Ball(all_sprites, ball_body, scale=True)
 
     center_body = world.CreateStaticBody(
         position=(-40, -20),
         shapes=polygonShape(box=(0.5, 0.5)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/hen.png")
-    return center_body, bird, RAT
+    return center_body, bird, rat, 2
 
 
 def level_3(world, all_sprites, bird_sprites):
@@ -77,11 +77,11 @@ def level_3(world, all_sprites, bird_sprites):
     #
     ball_body = world.CreateDynamicBody(position=(29, -8))
     ball_body.CreateCircleFixture(radius=6, density=15, friction=1, restitution=0.8)
-    RAT = Ball(all_sprites, ball_body, scale=True)
+    rat = Ball(all_sprites, ball_body, scale=True)
 
     center_body = world.CreateStaticBody(
         position=(-40, -20),
         shapes=polygonShape(box=(0.2, 0.2)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/red_circle.png")
-    return center_body, bird, RAT
+    return center_body, bird, rat, 3

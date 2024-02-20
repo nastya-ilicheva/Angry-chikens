@@ -2,38 +2,42 @@ import pygame as pg
 import sys
 
 from b2.functions import screen_to_world, world_to_screen
-# from catapult import Catapult
-# from Box2D.b2 import world as box2d_world, polygonShape, circleShape, staticBody, dynamicBody
 from Box2D.b2 import world, polygonShape, circleShape
 from b2 import settings
 import util
-from b2.primitives import *
-from catapult import FlyBird
 from levels import *
+from button import Button
+# from main import StartWindow
 
-pygame.init()
-world = world(gravity=(0, -0.5))
+# pygame.init()
+# world = world(gravity=(0, -0.5))
 
 
-class NewWindow1:
-    def __init__(self):
+class NewWindow:
+    def __init__(self, level_number, name_window):
+
+        self.world = world(gravity=(0, -0.5))
+
+        self.level_number = level_number
+        self.name_window = name_window
 
         self.fon = pygame.image.load("data/snow.jpg")
         self.all_sprites = pygame.sprite.Group()  # создаем группу спрайтов для всех спрайтов
 
         self.bricks = []  # список для хранения ссылок на спрайты
-        # self.level = 2
-        # self.c = 0
-        bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
+
+        bar_body = self.world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
+
+
 
 
     def run(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
         self.width, self.height = self.fon.get_width(), self.fon.get_height()
         screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("New Window")
+        pygame.display.set_caption(self.name_window)
 
         MYEVENTTYPE = pygame.USEREVENT + 1
         pygame.time.set_timer(MYEVENTTYPE, 4)
@@ -48,7 +52,15 @@ class NewWindow1:
         polygonShape.draw = util.my_draw_polygon
         circleShape.draw = util.my_draw_circle
 
-        center_body, bird, RAT = level_1(world, all_sprites, bird_sprites)
+        if self.level_number == 1:
+            center_body, bird, rat, bird_count = level_1(self.world, all_sprites, bird_sprites)
+        elif self.level_number == 2:
+            center_body, bird, rat, bird_count = level_2(self.world, all_sprites, bird_sprites)
+        elif self.level_number == 3:
+            center_body, bird, rat, bird_count = level_3(self.world, all_sprites, bird_sprites)
+
+        button_back = Button()
+        button_back.create_button(self.fon, 'white', 0, 0, 100, 50, 0, "back", "#1E90FF")
 
 
         flag1 = False
@@ -58,7 +70,6 @@ class NewWindow1:
         line = True
         died = False
         life = True
-        bird_count = 0
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -80,7 +91,7 @@ class NewWindow1:
                 # world.DestroyBody(RAT.body)
                 died = False
                 # NewWindow2().run2()
-            if RAT.rect.center[1] >= settings.SCREEN_HEIGHT and life:
+            if rat.rect.center[1] >= settings.SCREEN_HEIGHT and life:
                 died = True
                 life = False
                 print(f"life1: {life}")
@@ -90,6 +101,12 @@ class NewWindow1:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_back.pressed(pygame.mouse.get_pos()):
+                        # pygame.quit()
+                        # sys.exit()
+                        running = False
+
 
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)
@@ -97,13 +114,13 @@ class NewWindow1:
 
                 if event.type == create_bird_event and kill_bird:
                     bird.sprite.kill()
-                    world.DestroyBody(bird.sprite.body)
-                    center_body = world.CreateStaticBody(
+                    self.world.DestroyBody(bird.sprite.body)
+                    center_body = self.world.CreateStaticBody(
                         position=(-40, -20),
                         shapes=polygonShape(box=(0.2, 0.2)))
 
                     if bird_count < 2:
-                        bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
+                        bird = FlyBird(self.world, bird_sprites, center_body, "data/litle_red_bird.png")
                         bird_count += 1
                     kill_bird = False
                     line = True
@@ -117,22 +134,22 @@ class NewWindow1:
                         bird.mJoint.target = screen_to_world(pygame.mouse.get_pos())
                 if event.type == pygame.MOUSEBUTTONUP and event.button == 1 and moving == 1:
                     moving = 2
-                    world.DestroyJoint(bird.rope)
-                    world.DestroyJoint(bird.mJoint)
+                    self.world.DestroyJoint(bird.rope)
+                    self.world.DestroyJoint(bird.mJoint)
                     flag1 = True
 
 
                 if flag1:
                     if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
                             bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
-                        world.DestroyJoint(bird.joint)
-                        world.DestroyBody(center_body)
+                        self.world.DestroyJoint(bird.joint)
+                        self.world.DestroyBody(center_body)
                         flag1 = False
                         line = False
                         kill_bird = True
 
             screen.fill((0, 0, 0, 0))
-            util.draw_bodies(world)
+            util.draw_bodies(self.world)
             screen.blit(self.fon, (0, 0))
 
             catapult = pg.image.load('data/catapult.png')
@@ -148,7 +165,7 @@ class NewWindow1:
 
             # world.Step(TIME_STEP, 10, 10)
 
-            world.Step(settings.TIME_STEP, 10, 10)
+            self.world.Step(settings.TIME_STEP, 10, 10)
             all_sprites.update()
             all_sprites.draw(screen)
             bird_sprites.draw(screen)
@@ -163,5 +180,5 @@ class NewWindow1:
 
 
 if __name__ == "__main__":
-    window = NewWindow1()
+    window = NewWindow(3, "level 1")
     window.run()
