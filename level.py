@@ -70,6 +70,7 @@ class NewWindow:
         line = True
         died = False
         life = True
+        n = 1
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -123,12 +124,12 @@ class NewWindow:
                         position=(-40, -20),
                         shapes=polygonShape(box=(0.2, 0.2)))
 
-                    if bird_count < 2:
+                    if n < bird_count:
                         bird = FlyBird(self.world, bird_sprites, center_body, "data/litle_red_bird.png")
-                        bird_count += 1
-                    kill_bird = False
-                    line = True
-                    moving = 0
+                        n += 1
+                        kill_bird = False
+                        line = True
+                        moving = 0
 
                 # реализация катапульты (удаление всех джоинтов для полета птицы)
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and moving == 0:
