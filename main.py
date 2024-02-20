@@ -2,6 +2,7 @@ import pygame
 import sys
 from button import Button
 from level import NewWindow
+from b2.settings import SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 class StartWindow:
@@ -12,7 +13,7 @@ class StartWindow:
 
     def background_image(self):
 
-        self.fon = pygame.transform.scale(self.fon, (1300, 720))
+        self.fon = pygame.transform.scale(self.fon, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.image = self.fon
         self.width, self.height = self.image.get_width(), self.image.get_height()
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -28,6 +29,8 @@ class StartWindow:
                 myText = myFont.render(i, 1, '#FFEA28')
                 self.screen.blit(myText, (50, y))
                 y += 30
+
+
 
         pygame.display.update()
         button_level_1 = Button()
