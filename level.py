@@ -58,6 +58,10 @@ class NewWindow:
             center_body, bird, rat, bird_count, view_bird = level_2(self.world, all_sprites, bird_sprites)
         elif self.level_number == 3:
             center_body, bird, rat, bird_count, view_bird = level_3(self.world, all_sprites, bird_sprites)
+        elif self.level_number == 4:
+            center_body, bird, rat, bird_count, view_bird = level_4(self.world, all_sprites, bird_sprites)
+        elif self.level_number == 5:
+            center_body, bird, rat, bird_count, view_bird = level_5(self.world, all_sprites, bird_sprites)
 
         button_back = Button()
         button_back.create_button(self.fon, 'white', 0, 0, 100, 50, 0, "back", "#1E90FF")
