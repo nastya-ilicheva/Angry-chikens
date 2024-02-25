@@ -28,7 +28,7 @@ def level_1(world, all_sprites, bird_sprites):
         shapes=polygonShape(box=(0.2, 0.2)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/litle_red_bird.png")
-    return center_body, bird, rat, 2
+    return center_body, bird, rat, 2, "data/litle_red_bird.png"
 
 
 def level_2(world, all_sprites, bird_sprites):
@@ -56,7 +56,7 @@ def level_2(world, all_sprites, bird_sprites):
         shapes=polygonShape(box=(0.5, 0.5)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/hen.png")
-    return center_body, bird, rat, 2
+    return center_body, bird, rat, 2, "data/hen.png"
 
 
 def level_3(world, all_sprites, bird_sprites):
@@ -84,4 +84,4 @@ def level_3(world, all_sprites, bird_sprites):
         shapes=polygonShape(box=(0.2, 0.2)))
 
     bird = FlyBird(world, bird_sprites, center_body, "data/red_circle.png")
-    return center_body, bird, rat, 3
+    return center_body, bird, rat, 3, "data/red_circle.png"

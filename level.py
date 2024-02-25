@@ -53,11 +53,11 @@ class NewWindow:
         circleShape.draw = util.my_draw_circle
 
         if self.level_number == 1:
-            center_body, bird, rat, bird_count = level_1(self.world, all_sprites, bird_sprites)
+            center_body, bird, rat, bird_count, view_bird = level_1(self.world, all_sprites, bird_sprites)
         elif self.level_number == 2:
-            center_body, bird, rat, bird_count = level_2(self.world, all_sprites, bird_sprites)
+            center_body, bird, rat, bird_count, view_bird = level_2(self.world, all_sprites, bird_sprites)
         elif self.level_number == 3:
-            center_body, bird, rat, bird_count = level_3(self.world, all_sprites, bird_sprites)
+            center_body, bird, rat, bird_count, view_bird = level_3(self.world, all_sprites, bird_sprites)
 
         button_back = Button()
         button_back.create_button(self.fon, 'white', 0, 0, 100, 50, 0, "back", "#1E90FF")
@@ -125,7 +125,7 @@ class NewWindow:
                         shapes=polygonShape(box=(0.2, 0.2)))
 
                     if n < bird_count:
-                        bird = FlyBird(self.world, bird_sprites, center_body, "data/litle_red_bird.png")
+                        bird = FlyBird(self.world, bird_sprites, center_body, view_bird)
                         n += 1
                         kill_bird = False
                         line = True
