@@ -83,5 +83,5 @@ def level_3(world, all_sprites, bird_sprites):
         position=(-40, -20),
         shapes=polygonShape(box=(0.2, 0.2)))
 
-    bird = FlyBird(world, bird_sprites, center_body, "data/red_circle.png")
-    return center_body, bird, rat, 3, "data/red_circle.png"
+    bird = FlyBird(world, bird_sprites, center_body, "data/yellow_hen.png")
+    return center_body, bird, rat, 3, "data/yellow_hen.png"
