@@ -7,6 +7,7 @@ from b2 import settings
 import util
 from levels import *
 from button import Button
+from b2.settings import LEVEL_COMPLETED
 # from main import StartWindow
 
 # pygame.init()
@@ -91,27 +92,21 @@ class NewWindow:
                 print('died')
                 settings.COUNT += 1
                 print(settings.COUNT)
+                LEVEL_COMPLETED[self.level_number - 1] = 1
                 return True
-                # sys.exit()
-                # RAT.kill()
-                # world.DestroyBody(RAT.body)
-                died = False
-                # NewWindow2().run2()
+
             if rat.rect.center[1] >= settings.SCREEN_HEIGHT and life:
                 died = True
                 life = False
                 print(f"life1: {life}")
                 print(f"died1 {died}")
-            #life = False
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if button_back.pressed(pygame.mouse.get_pos()):
-                        # pygame.quit()
-                        # sys.exit()
-                        # running = False
                         return False
 
 

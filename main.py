@@ -3,7 +3,8 @@ import sys
 from button import Button
 from level import NewWindow
 import b2.settings
-from b2.settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from b2.settings import SCREEN_HEIGHT, SCREEN_WIDTH, LEVEL_COMPLETED
+from finish_window import FinalWindow
 
 
 class StartWindow:
@@ -95,6 +96,9 @@ class StartWindow:
                         new_window = NewWindow(5, "level 5")
                         new_window.run()
                         self.background_image()
+                if sum(LEVEL_COMPLETED) == 5:
+                    fwindow = FinalWindow()
+                    fwindow.run()
 
 
             pygame.display.update()
