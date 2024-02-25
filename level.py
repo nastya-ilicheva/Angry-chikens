@@ -67,7 +67,6 @@ class NewWindow:
         button_back = Button()
         button_back.create_button(self.fon, 'white', 0, 0, 100, 50, 0, "back", "#1E90FF")
 
-
         flag1 = False
         running = True
         moving = 0
@@ -75,7 +74,11 @@ class NewWindow:
         line = True
         died = False
         life = True
-        n = 1
+        n = 0
+
+        # myFont = pygame.font.SysFont('maiandragd', 40)
+        # myText = myFont.render(f'count bird: {n}/{bird_count}', 1, 'black')
+        # self.fon.blit(myText, (10, 200))
 
         pygame.mixer.music.load('data/chiken_music.mp3')
         pygame.mixer.music.play()
@@ -121,7 +124,7 @@ class NewWindow:
                         position=(-40, -20),
                         shapes=polygonShape(box=(0.2, 0.2)))
 
-                    if n < bird_count:
+                    if n - 1 < bird_count:
                         bird = FlyBird(self.world, bird_sprites, center_body, view_bird)
                         n += 1
                         kill_bird = False
@@ -150,9 +153,11 @@ class NewWindow:
                         line = False
                         kill_bird = True
 
-            screen.fill((0, 0, 0, 0))
+
             util.draw_bodies(self.world)
+            screen.fill((0, 0, 0, 0))
             screen.blit(self.fon, (0, 0))
+
 
             catapult = pg.image.load('data/catapult.png')
             scale = pygame.transform.scale(
@@ -160,6 +165,10 @@ class NewWindow:
                            catapult.get_height() // 2))
             scale_rect = scale.get_rect(center=(world_to_screen((-40, -26))))
             screen.blit(scale, scale_rect)
+
+            myFont = pygame.font.SysFont('maiandragd', 40)
+            myText = myFont.render(f'count bird: {n}/{bird_count + 2}', 1, 'white')
+            self.fon.blit(myText, (250, 50))
 
             if line:
                 pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-38, -18))), bird.sprite.rect.center, 8)

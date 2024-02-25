@@ -100,7 +100,6 @@ class StartWindow:
                     fwindow = FinalWindow()
                     fwindow.run()
 
-
             pygame.display.update()
 
 
