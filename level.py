@@ -83,12 +83,10 @@ class NewWindow:
         screen.blit(scale, scale_rect)
 
         while running:
-            print(f"life: {life}")
-            print(f"died {died}")
-            #print(RAT.rect.center)
             if died:
                 print('died')
                 settings.COUNT += 1
+                print(settings.COUNT)
                 return True
                 # sys.exit()
                 # RAT.kill()
@@ -185,5 +183,6 @@ class NewWindow:
 
 
 if __name__ == "__main__":
+    print(settings.COUNT)
     window = NewWindow(1, "hgfcjgfcg")
     window.run()

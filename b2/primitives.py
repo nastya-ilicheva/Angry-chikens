@@ -11,7 +11,7 @@ from b2.classes import ImageSpriteBody, AnimatedImageSpriteBody
 
 
 class Ball(ImageSpriteBody):
-    image = pygame.image.load("data/main_rat.png")
+    image = pygame.image.load("data/rat&egg.png")
 
 
 class Brick(ImageSpriteBody):

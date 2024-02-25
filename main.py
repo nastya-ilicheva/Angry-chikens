@@ -2,6 +2,7 @@ import pygame
 import sys
 from button import Button
 from level import NewWindow
+import b2.settings
 from b2.settings import SCREEN_HEIGHT, SCREEN_WIDTH
 
 
@@ -21,15 +22,34 @@ class StartWindow:
 
         self.screen.blit(self.image, (0, 0))
         y = 80
+        y2 = 550
+        t = ''
+        if b2.settings.COUNT == 0:
+            t = 'Go Return Eggs!'
+        elif b2.settings.COUNT == 1:
+            t = f'First win & You were able to steal an 1 egg '
+        else:
+            t = f'Youre the real hen`s killer & You have already returned {b2.settings.COUNT}eggs!'
+
+        text = t.split('&')
+        for i in text:
+            i = i.strip()
+            myFont = pygame.font.SysFont('maiandragd', 27)
+            myText = myFont.render(i, 1, '#FFEA28')
+            self.screen.blit(myText, (50, y2))
+            y2 += 30
+
+        # myFont1 = pygame.font.SysFont('maiandragd', 35)
+        # myText1 = myFont1.render(t.strip(), 1, '#FFF803')
+        # self.screen.blit(myText1, (50, 500))
+
         with open("data/chicen - pyki.txt") as f:
             for i in f:
                 i = i.strip()
                 myFont = pygame.font.SysFont('maiandragd', 27)
-                # myText = myFont.render(i, 1, '#FFFF66')
                 myText = myFont.render(i, 1, '#FFEA28')
                 self.screen.blit(myText, (50, y))
                 y += 30
-
 
 
         # pygame.display.update()

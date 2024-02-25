@@ -12,7 +12,7 @@ class Rat(pygame.sprite.Sprite):
         self.width = width
         self.fon = fon
         self.screen = screen
-        self.image = pygame.image.load("data/litle_mouse.png")
+        self.image = pygame.image.load("data/rat&egg.png")
         self.rect = self.image.get_rect()
         # self.rect_maus.topleft = (1000, 300)
         self.rat_die = 1  # флаг убийсва крысы, пока зеленый всегда
