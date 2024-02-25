@@ -1,6 +1,6 @@
 from b2.primitives import *
 from Box2D.b2 import world, polygonShape, circleShape
-from catapult import FlyBird
+from bird import FlyBird
 
 
 def level_1(world, all_sprites, bird_sprites):

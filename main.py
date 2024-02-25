@@ -32,7 +32,7 @@ class StartWindow:
 
 
 
-        pygame.display.update()
+        # pygame.display.update()
         button_level_1 = Button()
         button_level_1.create_button(self.screen, '#F5F5DC', 1133, 80, 100, 50, 0, "level 1", "#1E90FF")
 

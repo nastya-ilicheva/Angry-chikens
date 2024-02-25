@@ -10,17 +10,7 @@ from math import sin
 from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
 from Box2D import b2Color, b2MouseJointDef, b2RopeJointDef
 
-# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-# pygame.display.set_caption("Catapult")
-# clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
-
-
-# world = world(gravity=(0, -25))
-
-# util.screen = screen
-# polygonShape.draw = util.my_draw_polygon
-# circleShape.draw = util.my_draw_circle
 
 
 class FlyBird:
