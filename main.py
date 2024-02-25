@@ -66,6 +66,14 @@ class StartWindow:
                         new_window = NewWindow(3, "level 3")
                         new_window.run()
                         self.background_image()
+                    elif button_level_4.pressed(pygame.mouse.get_pos()):
+                        new_window = NewWindow(4, "level 4")
+                        new_window.run()
+                        self.background_image()
+                    elif button_level_5.pressed(pygame.mouse.get_pos()):
+                        new_window = NewWindow(5, "level 5")
+                        new_window.run()
+                        self.background_image()
 
 
             pygame.display.update()
