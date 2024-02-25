@@ -22,7 +22,7 @@ class StartWindow:
 
         self.screen.blit(self.image, (0, 0))
         y = 80
-        y2 = 550
+        y2 = 510
         t = ''
         if b2.settings.COUNT == 0:
             t = 'Go Return Eggs!'
@@ -39,9 +39,10 @@ class StartWindow:
             self.screen.blit(myText, (50, y2))
             y2 += 30
 
-        # myFont1 = pygame.font.SysFont('maiandragd', 35)
-        # myText1 = myFont1.render(t.strip(), 1, '#FFF803')
-        # self.screen.blit(myText1, (50, 500))
+        myFont = pygame.font.SysFont('maiandragd', 17)
+        myText = myFont.render(f'returns eggs: {b2.settings.COUNT}', 1, '#6E5023')
+        self.screen.blit(myText, (1120, 10))
+
 
         with open("data/chicen - pyki.txt") as f:
             for i in f:
