@@ -36,15 +36,15 @@ def level_2(world, all_sprites, bird_sprites):
     Brick(all_sprites, bar_body)  # пол
 
     brick_body = world.CreateDynamicBody(position=(19, -20))
-    brick_body.CreatePolygonFixture(box=(5.5, 9), density=2, friction=1)
+    brick_body.CreatePolygonFixture(box=(5.5, 9), density=5, friction=0)
     Brick(all_sprites, brick_body)  # правая стена
 
     brick_body = world.CreateDynamicBody(position=(37, -20))
-    brick_body.CreatePolygonFixture(box=(5.5, 9), density=1, friction=0.8)
+    brick_body.CreatePolygonFixture(box=(5.5, 9), density=6, friction=0)
     Brick(all_sprites, brick_body)  # левая стена
 
     brick_body = world.CreateDynamicBody(position=(28, -15))
-    brick_body.CreatePolygonFixture(box=(21, 2), density=1, friction=1)
+    brick_body.CreatePolygonFixture(box=(21, 2), density=8, friction=1)
     Brick(all_sprites, brick_body)  # крыша
     #
     ball_body = world.CreateDynamicBody(position=(29, -8))

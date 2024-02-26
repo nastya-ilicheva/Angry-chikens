@@ -24,8 +24,10 @@ class StartWindow:
 
         col_grey = '#C7C7C7'
         y = 80
-        y2 = 510
+        y2 = 480
         t = ''
+        pygame.mixer.music.load('data/crazy-frog-axel-f-2005.mp3')
+        pygame.mixer.music.play()
 
         if b2.settings.COUNT == 0:
             t = 'Go Return Eggs!'
@@ -37,7 +39,7 @@ class StartWindow:
         text = t.split('&')
         for i in text:
             i = i.strip()
-            myFont = pygame.font.SysFont('maiandragd', 27)
+            myFont = pygame.font.SysFont('maiandragd', 33)
             myText = myFont.render(i, 1, '#FFEA28')
             self.screen.blit(myText, (50, y2))
             y2 += 30
