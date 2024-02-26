@@ -80,7 +80,7 @@ class NewWindow:
         # myText = myFont.render(f'count bird: {n}/{bird_count}', 1, 'black')
         # self.fon.blit(myText, (10, 200))
 
-        pygame.mixer.music.load('data/chiken_music.mp3')
+        pygame.mixer.music.load('data/crazy-frog-axel-f-2005.mp3')
         pygame.mixer.music.play()
 
         catapult = pg.image.load('data/catapult.png')
