@@ -100,7 +100,7 @@ def level_4(world, all_sprites, bird_sprites):
     Brick(all_sprites, brick_body)  # крыша
     #
     ball_body = world.CreateDynamicBody(position=(15, -26))
-    ball_body.CreateCircleFixture(radius=5, density=15, friction=1.75, restitution=1.25)
+    ball_body.CreateCircleFixture(radius=5, density=15, friction=1.75, restitution=1.29)
     rat = Ball(all_sprites, ball_body, scale=True)
 
     center_body = world.CreateStaticBody(position=(-40, -20), shapes=polygonShape(box=(0.2, 0.2)))
