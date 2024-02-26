@@ -109,8 +109,10 @@ class StartWindow:
                         new_window.run()
                         self.background_image()
                 if sum(LEVEL_COMPLETED) == 5:
+                    print(LEVEL_COMPLETED)
                     fwindow = FinalWindow()
                     fwindow.run()
+                    self.background_image()
 
             pygame.display.update()
 
