@@ -92,17 +92,13 @@ class NewWindow:
 
         while running:
             if died:
-                print('died')
                 settings.COUNT += 1
-                print(settings.COUNT)
                 LEVEL_COMPLETED[self.level_number - 1] = 1
                 return True
 
             if rat.rect.center[1] >= settings.SCREEN_HEIGHT and life:
                 died = True
                 life = False
-                print(f"life1: {life}")
-                print(f"died1 {died}")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -166,9 +162,9 @@ class NewWindow:
             scale_rect = scale.get_rect(center=(world_to_screen((-40, -26))))
             screen.blit(scale, scale_rect)
 
-            myFont = pygame.font.SysFont('maiandragd', 40)
-            myText = myFont.render(f'count bird: {n}/{bird_count + 2}', 1, 'white')
-            self.fon.blit(myText, (250, 50))
+            myFont = pygame.font.SysFont('maiandragd', 18)
+            myText = myFont.render(f'Lives: {bird_count + 2-n}/{bird_count + 2}', 1, 'white')
+            screen.blit(myText, (1150, 30))
 
             if line:
                 pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-38, -18))), bird.sprite.rect.center, 8)
@@ -191,6 +187,5 @@ class NewWindow:
 
 
 if __name__ == "__main__":
-    print(settings.COUNT)
     window = NewWindow(1, "hgfcjgfcg")
     window.run()

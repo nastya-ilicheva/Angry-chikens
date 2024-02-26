@@ -110,28 +110,24 @@ def level_4(world, all_sprites, bird_sprites):
 
 
 def level_5(world, all_sprites, bird_sprites):
-    bar_body = world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(30, 1)))
+    bar_body = world.CreateStaticBody(position=(28, -28), shapes=polygonShape(box=(30, 1)))
     Brick(all_sprites, bar_body)  # пол
 
-    brick_body = world.CreateDynamicBody(position=(21, -20))
-    brick_body.CreatePolygonFixture(box=(5.5, 9), density=9, friction=1)
-    Brick(all_sprites, brick_body)  # правая стена
-
-    brick_body = world.CreateDynamicBody(position=(30, -20))
-    brick_body.CreatePolygonFixture(box=(10, 9), density=5, friction=0.8)
+    brick_body = world.CreateDynamicBody(position=(18, -20))
+    brick_body.CreatePolygonFixture(box=(5.5, 20), density=96, friction=10)
     Brick(all_sprites, brick_body)  # левая стена
 
-    brick_body = world.CreateDynamicBody(position=(28, -15))
-    brick_body.CreatePolygonFixture(box=(2, 21), density=10, friction=1)
-    Brick(all_sprites, brick_body)  # крыша
-    #
-    ball_body = world.CreateDynamicBody(position=(29, -8))
-    ball_body.CreateCircleFixture(radius=6, density=15, friction=1, restitution=0.8)
+    brick_body = world.CreateDynamicBody(position=(40, -20))
+    brick_body.CreatePolygonFixture(box=(4.5, 15), density=9, friction=1)
+    Brick(all_sprites, brick_body)  # правая стена
+
+    ball_body = world.CreateDynamicBody(position=(27.5, -20))
+    ball_body.CreateCircleFixture(radius=5.5, density=15, friction=1, restitution=1.1)
     rat = Ball(all_sprites, ball_body, scale=True)
 
     center_body = world.CreateStaticBody(
         position=(-40, -20),
         shapes=polygonShape(box=(0.2, 0.2)))
 
-    bird = FlyBird(world, bird_sprites, center_body, "data/blue_hen.png")
-    return center_body, bird, rat, 3, "data/blue_hen.png"
+    bird = FlyBird(world, bird_sprites, center_body, "data/grey_hen.png")
+    return center_body, bird, rat, 3, "data/grey_hen.png"

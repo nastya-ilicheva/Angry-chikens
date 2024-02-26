@@ -14,17 +14,30 @@ class FinalWindow:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("☠️Game_is_over☠️")
 
+        self.screen.blit(self.image, (0, 0))
+
+        t = 'Congratulations! & You have completed the game with dignity & and able to stole ALL eggS! &  & HERE NASTYA ARE MAKING &  AGAIN PLAY BUTTON'
+        y = 190
+
+        text = t.split('&')
+        for i in text:
+            i = i.strip()
+            myFont = pygame.font.SysFont('maiandragd', 35)
+            myText = myFont.render(i, 1, '#FFF921')
+            self.screen.blit(myText, (50, y))
+            y += 40
+            pygame.display.update()
+
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            self.screen.blit(self.image, (0, 0))
-            pygame.display.flip()
+
+        pygame.display.update()
 
 
 if __name__ == "__main__":
     window = FinalWindow()
     window.run()
-
