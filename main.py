@@ -11,7 +11,6 @@ class StartWindow:
     def __init__(self):
         pygame.init()
         self.fon = pygame.image.load("data/zastavka.jpg")
-        self.font = pygame.font.Font('data/better-vcr-5.4.ttf', 32)
 
     def background_image(self):
 
