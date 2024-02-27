@@ -19,7 +19,7 @@ class FinalWindow:
         pygame.display.set_caption("☠️Game_is_over☠️")
         self.screen.blit(self.image, (0, 0))
 
-        t = 'Congratulations! & You have completed the game with dignity & and able to stole ALL eggS! &  & HERE NASTYA ARE MAKING &  AGAIN PLAY BUTTON'
+        t = 'Congratulations! & You have completed the game with dignity & and able to stole ALL eggS! &  '
         y = 190
 
         text = t.split('&')
