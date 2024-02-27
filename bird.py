@@ -34,7 +34,7 @@ class FlyBird:
         self.rope = world.CreateJoint(b2RopeJointDef(
             bodyA=self.ball_body,
             bodyB=self.center_body,
-            maxLength=20,
+            maxLength=15,
             localAnchorA=(0, 0),
             localAnchorB=(0, 0)))
 

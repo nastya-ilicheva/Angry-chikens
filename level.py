@@ -8,6 +8,8 @@ import util
 from levels import *
 from button import Button
 from b2.settings import LEVEL_COMPLETED
+
+
 # from main import StartWindow
 
 # pygame.init()
@@ -30,9 +32,6 @@ class NewWindow:
         bar_body = self.world.CreateStaticBody(position=(29, -28), shapes=polygonShape(box=(20, 1)))
         brick_sprite = Brick(self.all_sprites, bar_body)
         self.bricks.append(brick_sprite)  # сохраняем ссылку на спрайт
-
-
-
 
     def run(self):
         self.fon = pygame.transform.scale(self.fon, (1300, 750))
@@ -76,10 +75,6 @@ class NewWindow:
         life = True
         n = 0
 
-        # myFont = pygame.font.SysFont('maiandragd', 40)
-        # myText = myFont.render(f'count bird: {n}/{bird_count}', 1, 'black')
-        # self.fon.blit(myText, (10, 200))
-
         pygame.mixer.music.load('data/crazy-frog-axel-f-2005.mp3')
         pygame.mixer.music.play()
 
@@ -108,12 +103,13 @@ class NewWindow:
                     if button_back.pressed(pygame.mouse.get_pos()):
                         return False
 
-
                 if event.type == MYEVENTTYPE:
                     bird_sprites.update(True)
                     all_sprites.update()
 
-                if event.type == create_bird_event and kill_bird:
+                if (event.type == create_bird_event and kill_bird or
+                        bird.sprite.rect.center[1] > settings.SCREEN_HEIGHT and kill_bird or
+                        bird.sprite.rect.center[0] > settings.SCREEN_WIDTH and kill_bird):
                     bird.sprite.kill()
                     self.world.DestroyBody(bird.sprite.body)
                     center_body = self.world.CreateStaticBody(
@@ -139,7 +135,6 @@ class NewWindow:
                     self.world.DestroyJoint(bird.mJoint)
                     flag1 = True
 
-
                 if flag1:
                     if (bird.ball_body.position.x - bird.center_body.position.x) ** 2 + (
                             bird.ball_body.position.y - bird.center_body.position.y) ** 2 < 4:
@@ -149,11 +144,9 @@ class NewWindow:
                         line = False
                         kill_bird = True
 
-
             util.draw_bodies(self.world)
             screen.fill((0, 0, 0, 0))
             screen.blit(self.fon, (0, 0))
-
 
             catapult = pg.image.load('data/catapult.png')
             scale = pygame.transform.scale(
@@ -163,27 +156,18 @@ class NewWindow:
             screen.blit(scale, scale_rect)
 
             myFont = pygame.font.SysFont('maiandragd', 18)
-            myText = myFont.render(f'Lives: {bird_count + 2-n}/{bird_count + 2}', 1, 'white')
+            myText = myFont.render(f'Lives: {bird_count + 2 - n}/{bird_count + 2}', 1, 'white')
             screen.blit(myText, (1150, 30))
 
             if line:
                 pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-38, -18))), bird.sprite.rect.center, 8)
                 pygame.draw.line(screen, (53, 23, 12), (world_to_screen((-42, -18))), bird.sprite.rect.center, 8)
 
-            # world.Step(TIME_STEP, 10, 10)
-
             self.world.Step(settings.TIME_STEP, 10, 10)
             all_sprites.update()
             all_sprites.draw(screen)
             bird_sprites.draw(screen)
             pygame.display.flip()
-            # if self.c == 3 and died:
-            #     NewWindow2().run2()
-            #     self.level = 2
-            # elif self.c == 3 and died == False:
-
-
-            # clock.tick(TARGET_FPS)
 
 
 if __name__ == "__main__":
